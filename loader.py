@@ -27,4 +27,3 @@ neo4j_graph = Neo4jGraph(
 create_constraints(neo4j_graph)
 create_vector_index(neo4j_graph)
 
-st.write("Hello world")
