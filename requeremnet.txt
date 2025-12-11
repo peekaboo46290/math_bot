@@ -1,0 +1,6 @@
+docling 
+langchain 
+langchain_neo4j
+dotenv
+pydantic
+streamlit
