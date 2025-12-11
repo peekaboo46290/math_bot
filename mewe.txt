@@ -1,0 +1,6 @@
+python -m venv new_env
+pip install -r requeremnet.txt
+source ./new_env/bin/activate
+###
+normalent mansit shyn
+###

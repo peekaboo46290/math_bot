@@ -1,13 +1,16 @@
 import os
-from typing import List
+from typing import List, Dict, Any
 from dotenv import load_dotenv
+
+from pydantic import BaseModel, Field
+
+from docling.document_converter import DocumentConverter
 from langchain_neo4j import Neo4jGraph
 import streamlit as st
 from streamlit.logger import get_logger
+
 from utils import initialize_smth
 from chains import load_embedding_model
-from docling.document_converter import DocumentConverter
-from pydantic import BaseModel, Field
 
 input_path = "./input/"
 converter = DocumentConverter()
@@ -97,4 +100,31 @@ def add_theorem(theorem:Theorem):
         return True
     except Exception as e:
         logger.info(f"Failed to add {theorem.name}: {e}")
-        return False
+        return False    
+
+def get_theorems_by_subject(subject: str, limit: int = 10) -> List[Dict[str, Any]]:
+        query = """
+        MATCH (t:Theorem)-[:BELONGS_TO_SUBJECT]->(s:Subject {name: $subject})
+        RETURN t.name as name, 
+                t.statement as statement, 
+                t.type as type, 
+                t.proof as proof
+        ORDER BY t.name
+        LIMIT $limit
+        """
+        result = neo4j_graph.query(query, params={'subject': subject, 'limit': limit})
+        return result
+
+
+def get_theorems_by_domain(domain: str, limit: int = 10) -> List[Dict[str, Any]]:
+        query = """
+        MATCH (t:Theorem)-[:BELONGS_TO_DOMAIN]->(s:Domain {name: $domain})
+        RETURN t.name as name, 
+                t.statement as statement, 
+                t.type as type, 
+                t.proof as proof
+        ORDER BY t.name
+        LIMIT $limit
+        """
+        result = neo4j_graph.query(query, params={'subject': domain, 'limit': limit})
+        return result
