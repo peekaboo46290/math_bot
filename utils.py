@@ -1,6 +1,6 @@
 import re
 import json
-import pdfplumber
+import fitz
 from typing import List
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -11,12 +11,23 @@ class BaseLogger:
     def __init__(self) -> None:
         self.info = print
 
-def read_pdf_pymupdf(pdf_path: str) -> str:
+def read_pdf_pymupdf(pdf_path: str, logger = BaseLogger()) -> str:
     text = ""
-    with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:
-                text += page.extract_text() + "\n\n"
-    return text
+    try:
+        # Open the PDF
+        doc = fitz.open(pdf_path)
+        
+        # Extract text from each page
+        for page_num in range(len(doc)):
+            page = doc.load_page(page_num)
+            text += page.get_text() + "\n\n"
+        
+        doc.close()
+        logger.info(f"Extracted {len(text)} characters")
+        return text
+    except Exception as e:
+        logger.info(f"Error reading PDF with PyMuPDF: {e}")
+        return ""
 
 
 def initialize_smth(driver, logger= BaseLogger()):
@@ -33,13 +44,44 @@ def initialize_smth(driver, logger= BaseLogger()):
             logger.info(f"Schema element already exists or error: {e}")
 
 
-def extract_from_text(llm_chain, text: str, logger= BaseLogger()) -> List[Theorem]:
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=2500,
-        chunk_overlap=250,
-        separators=["\n\n\n", "\n\n", "\n", ". ", " ", ""],
-        length_function=len
+def create_math_aware_splitter(chunk_size: int = 2500, chunk_overlap: int = 250):
+    # Prioritized separators - split at these first
+    proof_markers = [
+        "\n\n\n",           # Major section breaks
+        "\n\n",             # Paragraph breaks
+        "∎\n",              # End of proof with newline
+        "□\n",              # Alternative QED with newline
+        "Proof.",           # Start of proof
+        "Theorem ",         # Start of theorem
+        "Lemma ",           # Start of lemma
+        "Proposition ",     # Start of proposition
+        "Corollary ",       # Start of corollary
+        "Definition ",      # Start of definition
+    ]
+    
+    # Logical break points
+    logical_breaks = [
+        "∴ ",               # Therefore
+        "∵ ",               # Because
+        "⇒ ",               # Implies
+        "⇔ ",               # If and only if
+        "\n",               # Line break
+        ". ",               # Sentence end
+    ]
+    
+    # Combine all separators
+    all_separators = proof_markers + logical_breaks + [" ", ""]
+    
+    return RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        separators=all_separators,
+        length_function=len,
+        is_separator_regex=False
     )
+
+def extract_from_text(llm_chain, text: str, logger= BaseLogger()) -> List[Theorem]:
+    text_splitter = create_math_aware_splitter()
     
     chunks = text_splitter.split_text(text)
     logger.info(f"Split text into {len(chunks)} chunks")

@@ -1,7 +1,9 @@
 docling 
-langchain 
-langchain_neo4j
 dotenv
 pydantic
 streamlit
-PyMuPDF
+pdfplumber
+langchain_text_splitters
+langchain 
+langchain_neo4j
+langchain_ollama

@@ -21,6 +21,13 @@ password = os.getenv("NEO4J_PASSWORD")
 ollama_base_url = os.getenv("OLLAMA_BASE_URL")
 llm_name = os.getenv("LLM")
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='neo4j_debug.log',
+    filemode='w'
+)
+
 logger = logging.getLogger(__name__)
 
 prompt = PromptTemplate(
@@ -52,6 +59,7 @@ Rules:
 7. Do not return anything other than the JSON object.
 8. Do not include any explanations or apologies in your responses.
 9. Do not hallucinate.
+10. Skip any book introduction.
 
 Text to analyze:
 {text}
@@ -91,9 +99,7 @@ def add_theorem(theorem:Theorem):
                 SET t.statement = $statement,
                     t.proof = $proof,
                     t.type = $type
-                    //you can remove below added them for the haha
-                    t.updated_at = datetime()
-                ON CREATE SET t.created_at = datetime()
+                    
                 
                 MERGE (s:Subject {name: $subject})
                 MERGE (t)-[:BELONGS_TO_SUBJECT]->(s)
@@ -110,7 +116,7 @@ def add_theorem(theorem:Theorem):
                 'name': theorem.name,
                 'statement': theorem.statement,
                 'proof': theorem.proof,
-                'type': theorem.t_type,
+                'type': theorem.type,
                 'subject': theorem.subject,
                 'domain': theorem.domain
             }
@@ -166,7 +172,7 @@ def get_theorems_by_domain(domain: str, limit: int = 10) -> List[Dict[str, Any]]
 #add here some more get
 
 def process_file(file_path:str):
-    text = read_pdf_pymupdf(file_path)
+    text = read_pdf_pymupdf(file_path, logger=logger)
     theorems = extract_from_text(
         llm_chain= chain,
         text= text,
