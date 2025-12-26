@@ -1,3 +1,0 @@
-2025-12-26 01:53:26,683 - __main__ - INFO - Embedding: Using Ollama
-2025-12-26 01:53:27,069 - __main__ - INFO - Loaded llm: qwen2-math:7b
-2025-12-26 01:53:27,069 - __main__ - INFO - did the chain stuff

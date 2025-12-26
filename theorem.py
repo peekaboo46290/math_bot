@@ -1,7 +1,7 @@
 from typing import List, Optional
 from pydantic import BaseModel, Field, field_validator, ValidationInfo
 
-from utils import BaseLogger
+from base_logger import BaseLogger
 
 
 class Theorem(BaseModel):

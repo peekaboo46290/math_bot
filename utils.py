@@ -4,26 +4,20 @@ import fitz
 from typing import List
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from docling.document_converter import DocumentConverter
 
 from theorem import Theorem
+from base_logger import BaseLogger
 
-class BaseLogger:
-    def __init__(self) -> None:
-        self.info = print
+converter = DocumentConverter()
 
-def read_pdf_pymupdf(pdf_path: str, logger = BaseLogger()) -> str:
+
+def read_pdf(pdf_path: str, logger = BaseLogger()) -> str:
     text = ""
     try:
-        # Open the PDF
-        doc = fitz.open(pdf_path)
+        result = converter.convert(pdf_path)
         
-        # Extract text from each page
-        for page_num in range(len(doc)):
-            page = doc.load_page(page_num)
-            text += page.get_text() + "\n\n"
-        
-        doc.close()
-        logger.info(f"Extracted {len(text)} characters")
+        text = result.document.export_to_markdown()
         return text
     except Exception as e:
         logger.info(f"Error reading PDF with PyMuPDF: {e}")
@@ -89,17 +83,23 @@ def extract_from_text(llm_chain, text: str, logger= BaseLogger()) -> List[Theore
     logger.info(f"Split text into {len(chunks)} chunks")
     
     all_theorems = []
+    all_examples = []
+
     for i, chunk in enumerate(chunks, 1):
         logger.info(f"Processing chunk {i}/{len(chunks)}")
-        theorems = extract_from_chunk(llm_chain= llm_chain,chunk= chunk, logger= logger)
+        theorems, examples = extract_from_chunk(llm_chain= llm_chain,chunk= chunk, logger= logger)
         all_theorems.extend(theorems)
+        all_examples.extend(examples)
         logger.info(f"Extracted {len(theorems)} theorems from chunk {i}")
     
     
     unique_theorems = {t.name: t for t in all_theorems}.values()
+    unique_examples = {e.name: e for e in all_examples}.values()
+
     logger.info(f"Total unique theorems extracted: {len(unique_theorems)}")
+    logger.info(f"Total unique examples extracted: {len(unique_examples)}")
     
-    return list(unique_theorems)
+    return list(unique_theorems), list(unique_examples)
 
 
 def extract_from_chunk(llm_chain, chunk: str, logger= BaseLogger()) -> List[Theorem]:
@@ -124,13 +124,22 @@ def parse_response(response:str, logger= BaseLogger()):
         for thm_data in data.get('theorems', []):
             try:
                 theorem = Theorem(**thm_data)
-                theorem.logger = logger
                 theorems.append(theorem)
             except Exception as e:
                 logger.warning(f"Failed to validate theorem: {e}")
                 continue
+
+        examples = []
+        for ex_data in data.get('examples', []):
+            try:
+                example = Theorem(**thm_data, logger= logger)
+                examples.append(example)
+            except Exception as e:
+                logger.warning(f"Failed to validate theorem: {e}")
+                continue
         
-        return theorems
+        return theorems, examples
+    
     except json.JSONDecodeError as e:
         logger.error(f"JSON parsing error: {e}")
         return []

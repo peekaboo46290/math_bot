@@ -8,7 +8,7 @@ from langchain_core.prompts import (
     HumanMessagePromptTemplate,
     SystemMessagePromptTemplate,
 )
-from utils import BaseLogger
+from base_logger import BaseLogger
 
 
 

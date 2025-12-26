@@ -9,7 +9,7 @@ from langchain_core.output_parsers import StrOutputParser
 # from streamlit.logger import get_logger
 import logging
 
-from utils import initialize_smth, read_pdf_pymupdf, extract_from_text
+from utils import initialize_smth, read_pdf, extract_from_text
 from chains import load_embedding_model, load_llm
 
 from theorem import Theorem
@@ -247,18 +247,18 @@ def get_theorems_by_domain(domain: str, limit: int = 10) -> List[Dict[str, Any]]
         result = neo4j_graph.query(query, params={'subject': domain, 'limit': limit})
         return result
 
-#add here some more get
+#add here some more get and move them
 
 def process_file(file_path:str):
-    text = read_pdf_pymupdf(file_path, logger=logger)
-    theorems = extract_from_text(
+    text = read_pdf(file_path, logger=logger)
+    theorems, examples = extract_from_text(
         llm_chain= chain,
         text= text,
         logger= logger
     )
     
     successful_count = 0
-    failed_count = 0
+    failed_count = 0 
     
     for theorem in theorems:
         if add_theorem(theorem):
@@ -268,7 +268,21 @@ def process_file(file_path:str):
     
     logger.info(f"Successfully added {successful_count} theorem(s)")
     logger.info(f"Failed to added {failed_count} theorem(s)")
-    logger.info(f"Finished processing.\n{"=" * 50}")
+
+    successful_count = 0
+    failed_count = 0
+    
+    for example in examples:
+        if add_example(example):
+            successful_count += 1
+        else:
+            failed_count += 1
+
+    logger.info(f"Successfully added {successful_count} example(s)")
+    logger.info(f"Failed to added {failed_count} example(s)")
+
+    logger.info(f"Finished processing.")
+    logger.info("=" * 80)
 
 
 
@@ -278,7 +292,8 @@ def load_input(input_path = "input/"):
     
     for file in os.listdir(input_path):
         if file.endswith(".pdf"):
-            logger.info(f"{"=" * 50}\nProcessing: {file}")
+            logger.info("=" * 80)
+            logger.info(f"Processing: {file}")
             pdf_file_path = os.path.join(input_path, file)
             process_file(pdf_file_path)
 

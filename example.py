@@ -1,7 +1,7 @@
 from typing import List, Optional
 from pydantic import BaseModel, Field, field_validator, ValidationInfo
 
-from utils import BaseLogger
+from base_logger import BaseLogger
 
 class Example(BaseModel):
     logger: BaseLogger = Field(default= BaseLogger(), description="Too log information")
@@ -13,9 +13,9 @@ class Example(BaseModel):
     illustrates_theorems: List[str] = Field(default_factory=list, description="Theorems this example illustrates")
     difficulty: str = Field(default="Medium", description="Easy, Medium, or Hard")#for indexing
 
-    @field_validator('name', 'description', 'content', 'subject', 'domain')
+    @field_validator('name', 'content', 'subject', 'domain')
     @classmethod
-    def not_empty(cls, v):
+    def not_empty(cls, v:str):
         if not v or not v.strip():
             raise ValueError('Field cannot be empty')
         return v.strip()
