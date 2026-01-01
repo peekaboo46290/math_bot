@@ -25,6 +25,7 @@ def load_embedding_model(logger=logger, config={}):
 def load_llm(llm_name:str, ollama_base_url:str, logger = logger):
     try:
         llm =  ChatOllama(
+            num_predict= 2048,
             temperature=0,
             base_url=ollama_base_url,
             model=llm_name,

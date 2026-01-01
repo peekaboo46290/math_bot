@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 
 
 from langchain_neo4j import Neo4jGraph
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 # from streamlit.logger import get_logger
 from base_logger import logger
 
@@ -23,7 +23,9 @@ ollama_base_url = os.getenv("OLLAMA_BASE_URL")
 llm_name = os.getenv("LLM")
 
 
-template="""You are an expert mathematician. Extract all mathematical theorems, lemmas, propositions,  corollaries and examples from the text below.
+prompt = PromptTemplate(
+    input_variables=["text"],
+template="""You are an expert mathematician. Extract all mathematical theorems, lemmas, propositions,  cororectallaries and examples from the text below.
 
 Return ONLY a valid JSON object in this exact format (no other text):
 {{
@@ -51,6 +53,7 @@ Return ONLY a valid JSON object in this exact format (no other text):
 ]
 }}
 
+Most important rule: Only use valid JSON escape sequences
 Rules:
 1. Extract ALL mathematical statements
 2. Use clear, standard mathematical terminology
@@ -69,25 +72,18 @@ Rules:
 15 If no examples found, return empty examples array.
 16 If no theorems found, return empty theorems array.
 17. chose one type for theorem type
-CRITICAL JSON RULES:
-- Use Unicode symbols directly: ∀, ∃, →, ⇒ (NOT LaTeX: \\forall, \\exists)
-- Do NOT use backslashes in strings unless escaping quotes
-- Use " for strings, escape internal quotes as \\"
-- Valid escapes only: \\", \\\\, \\n, \\t
+18. Use Unicode symbols directly: ∀, ∃, →, ⇒
+CRITICAL: When writing mathematical statements in JSON:
+1. Use plain text or Unicode symbols
+2. If you MUST use LaTeX, escape backslashes: use \\ for single backslash
+3. Example: "statement": "If \\(a\\) and \\(b\\) are integers..." is WRONG dont use
+5. Better: "statement": "If a and b are integers..." (plain text)
 
-Example CORRECT format:
-{
-  "statement": "For all x ∈ ℝ, we have x² ≥ 0",
-  "proof": "Let x ∈ ℝ. Then x² ≥ 0 by definition."
-}
+Text to analyze:
+{text}
 
-Return valid JSON only."""
-prompt = ChatPromptTemplate.from_messages([
-    ("system", template), 
-    ("human", f"Text to analyze:\n\n{{text}}\n\nJSON response:")
-])
-    
-        
+JSON response:""")
+
 
 
 embeddings, dimension = load_embedding_model(

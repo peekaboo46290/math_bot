@@ -117,10 +117,32 @@ def extract_from_text(llm_chain, text: str, logger= logger) :
     
     return list(unique_theorems), list(unique_examples)
 
+def clean_json_output(llm_output):
+    """Clean LLM output to make it valid JSON"""
+    text = llm_output.strip()
+    
+    # Remove markdown code blocks
+    if text.startswith("```json"):
+        text = text[7:-3].strip()
+    elif text.startswith("```"):
+        text = text[3:-3].strip()
+    
+    # Fix common JSON issues
+    text = text.replace('\\n', '\\\\n')  # Escape newlines
+    text = text.replace('\\t', '\\\\t')  # Escape tabs
+    text = text.replace('\\"', '"')  # Unescape quotes
+    
+    # Remove trailing commas in arrays/objects
+    import re
+    text = re.sub(r',\s*}', '}', text)
+    text = re.sub(r',\s*]', ']', text)
+    
+    return text
 
 def extract_from_chunk(llm_chain, chunk: str, logger= logger) :
         try:
-            response = llm_chain.invoke({"statement": chunk})
+            response = llm_chain.invoke({"text": chunk})
+            print( response)
             theorems, examples =  parse_response(response= response,logger= logger)
             return theorems, examples
         except Exception as e:
@@ -136,7 +158,7 @@ def parse_response(response:str, logger= logger):
             return [], []
         
         data = json.loads(json_match.group())
-        
+        logger.info(f"there is {len(data)} entire")
         theorems = []
         for thm_data in data.get('theorems', []):
             try:
