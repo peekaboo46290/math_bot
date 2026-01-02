@@ -52,10 +52,11 @@ Return ONLY a valid JSON object in this exact format (no other text):
 }}
 ]
 }}
+Most important rule: Return only Json don't talk
 
-Most important rule: Only use valid JSON escape sequences Don't use "\\)" and "\\(" just use plain "(" and ")"
+-Only use valid JSON escape sequences Don't use "\\)" and "\\(" just use plain "(" and ")"
 Rules:
-1. Extract ALL mathematical statements
+1. Extract ALL mathematical statements and make them descriptive
 2. Use clear, standard mathematical terminology
 3. If proof is not explicit, write "Not provided"
 4. Dependencies are theorem names mentioned in the proof

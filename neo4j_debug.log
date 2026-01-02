@@ -1,880 +1,320 @@
-2026-01-02 01:28:02,434 - base_logger - INFO - Embedding: Using Ollama
-2026-01-02 01:28:02,834 - base_logger - INFO - Loaded llm: qwen2-math:7b
-2026-01-02 01:28:02,834 - base_logger - INFO - did the chain stuff
-2026-01-02 01:28:04,881 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT theorem_name IF NOT EXISTS FOR (e:Theorem) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT theorem_name FOR (e:Theorem) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT theorem_name IF NOT EXISTS FOR (t:Theorem) REQUIRE t.name IS UNIQUE'
-2026-01-02 01:28:04,886 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT example_name IF NOT EXISTS FOR (e:Example) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT example_name FOR (e:Example) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT example_name IF NOT EXISTS FOR (e:Example) REQUIRE e.name IS UNIQUE'
-2026-01-02 01:28:04,890 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX subject_name IF NOT EXISTS FOR (e:Subject) ON (e.name)` has no effect.} {description: `RANGE INDEX subject_name FOR (e:Subject) ON (e.name)` already exists.} {position: None} for query: 'CREATE INDEX subject_name IF NOT EXISTS FOR (s:Subject) ON (s.name)'
-2026-01-02 01:28:04,896 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX domain_name IF NOT EXISTS FOR (e:Domain) ON (e.name)` has no effect.} {description: `RANGE INDEX domain_name FOR (e:Domain) ON (e.name)` already exists.} {position: None} for query: 'CREATE INDEX domain_name IF NOT EXISTS FOR (d:Domain) ON (d.name)'
-2026-01-02 01:28:04,900 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX theorem_type IF NOT EXISTS FOR (e:Theorem) ON (e.type)` has no effect.} {description: `RANGE INDEX theorem_type FOR (e:Theorem) ON (e.type)` already exists.} {position: None} for query: 'CREATE INDEX theorem_type IF NOT EXISTS FOR (t:Theorem) ON (t.type)'
-2026-01-02 01:28:04,903 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX example_difficulty IF NOT EXISTS FOR (e:Example) ON (e.difficulty)` has no effect.} {description: `RANGE INDEX example_difficulty FOR (e:Example) ON (e.difficulty)` already exists.} {position: None} for query: 'CREATE INDEX example_difficulty IF NOT EXISTS FOR (e:Example) ON (e.difficulty)'
-2026-01-02 01:28:04,905 - base_logger - INFO - Successfully connected to Neo4j
-2026-01-02 01:28:04,905 - base_logger - INFO - ================================================================================
-2026-01-02 01:28:04,906 - base_logger - INFO - Processing: David_S_Dummit_Richard_M_Foote_Abstract_Algeb_230928_225848.pdf
-2026-01-02 01:28:08,256 - base_logger - INFO - Extracted 2582873 characters
-2026-01-02 01:28:08,292 - base_logger - INFO - Split text into 1608 chunks
-2026-01-02 01:28:08,293 - base_logger - INFO - Processing chunk 1/1608
-2026-01-02 01:28:08,619 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:28:08,909 - base_logger - INFO - there is 2 entire
-2026-01-02 01:28:08,909 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 1
-2026-01-02 01:28:08,909 - base_logger - INFO - Processing chunk 2/1608
-2026-01-02 01:28:09,229 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:28:12,656 - base_logger - INFO - there is 2 entire
-2026-01-02 01:28:12,656 - base_logger - INFO - Extracted 1 theorems and 1 examples from chunk 2
-2026-01-02 01:28:12,656 - base_logger - INFO - Processing chunk 3/1608
-2026-01-02 01:28:12,770 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:28:19,213 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 16 column 41 (char 580)
-2026-01-02 01:28:19,213 - base_logger - INFO - {
-"theorems": [
+2026-01-02 03:11:09,610 - base_logger - INFO - Embedding: Using Ollama
+2026-01-02 03:11:09,974 - base_logger - INFO - Loaded llm: exaone-deep:7.8b
+2026-01-02 03:11:09,974 - base_logger - INFO - did the chain stuff
+2026-01-02 03:11:12,038 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT theorem_name IF NOT EXISTS FOR (e:Theorem) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT theorem_name FOR (e:Theorem) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT theorem_name IF NOT EXISTS FOR (t:Theorem) REQUIRE t.name IS UNIQUE'
+2026-01-02 03:11:12,041 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE CONSTRAINT example_name IF NOT EXISTS FOR (e:Example) REQUIRE (e.name) IS UNIQUE` has no effect.} {description: `CONSTRAINT example_name FOR (e:Example) REQUIRE (e.name) IS UNIQUE` already exists.} {position: None} for query: 'CREATE CONSTRAINT example_name IF NOT EXISTS FOR (e:Example) REQUIRE e.name IS UNIQUE'
+2026-01-02 03:11:12,043 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX subject_name IF NOT EXISTS FOR (e:Subject) ON (e.name)` has no effect.} {description: `RANGE INDEX subject_name FOR (e:Subject) ON (e.name)` already exists.} {position: None} for query: 'CREATE INDEX subject_name IF NOT EXISTS FOR (s:Subject) ON (s.name)'
+2026-01-02 03:11:12,045 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX domain_name IF NOT EXISTS FOR (e:Domain) ON (e.name)` has no effect.} {description: `RANGE INDEX domain_name FOR (e:Domain) ON (e.name)` already exists.} {position: None} for query: 'CREATE INDEX domain_name IF NOT EXISTS FOR (d:Domain) ON (d.name)'
+2026-01-02 03:11:12,047 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX theorem_type IF NOT EXISTS FOR (e:Theorem) ON (e.type)` has no effect.} {description: `RANGE INDEX theorem_type FOR (e:Theorem) ON (e.type)` already exists.} {position: None} for query: 'CREATE INDEX theorem_type IF NOT EXISTS FOR (t:Theorem) ON (t.type)'
+2026-01-02 03:11:12,050 - neo4j.notifications - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX example_difficulty IF NOT EXISTS FOR (e:Example) ON (e.difficulty)` has no effect.} {description: `RANGE INDEX example_difficulty FOR (e:Example) ON (e.difficulty)` already exists.} {position: None} for query: 'CREATE INDEX example_difficulty IF NOT EXISTS FOR (e:Example) ON (e.difficulty)'
+2026-01-02 03:11:12,050 - base_logger - INFO - Successfully connected to Neo4j
+2026-01-02 03:11:12,050 - base_logger - INFO - ================================================================================
+2026-01-02 03:11:12,050 - base_logger - INFO - Processing: David_S_Dummit_Richard_M_Foote_Abstract_Algeb_230928_225848.pdf
+2026-01-02 03:11:15,508 - base_logger - INFO - Extracted 2582873 characters
+2026-01-02 03:11:15,538 - base_logger - INFO - Split text into 1608 chunks
+2026-01-02 03:11:15,539 - base_logger - INFO - Processing chunk 1/1608
+2026-01-02 03:11:16,343 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-02 03:11:59,128 - base_logger - WARNING - No JSON found in response
+2026-01-02 03:11:59,128 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 1
+2026-01-02 03:11:59,128 - base_logger - INFO - Processing chunk 2/1608
+2026-01-02 03:11:59,667 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-02 03:12:37,076 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 6 column 84 (char 312)
+2026-01-02 03:12:37,076 - base_logger - INFO - <thought>
+Okay, let's tackle this problem step by step. The user wants me to extract all mathematical theorems, lemmas, propositions, etc., from the given text and present them in a valid JSON format. 
+
+First, I need to parse the text provided. The text mentions various mathematical concepts like LT(f), Hom(A,B), Tor, Ann, etc. These are likely theorems or propositions related to algebra, specifically module theory, homological algebra, and commutative algebra.
+
+Starting with the theorems. The text mentions "the leading term of the polynomial f, the ideal of leading terms" which sounds like a theorem about leading terms in polynomials. Then there's "the matrix of the linear transformation rp" which could be about representing linear maps as matrices. "The trace of the matrix A" is another theorem about trace properties. "The R-module homomorphisms from A to B" might be about homomorphism theorems. "The endomorphism ring of the module M" is a theorem about endomorphism rings. "The torsion submodule of M" relates to torsion in modules. "The tensor product of modules M and N over R" is a fundamental theorem in tensor products. "The kth tensor power" and similar terms suggest theorems on tensor algebras and powers. "The minimal polynomial of a over F" is a theorem from field theory. "The group of automorphisms of a field K" is a theorem about automorphism groups. "The Galois group of the extension KIF" is a Galois theory theorem. "Affine 17-space" might refer to theorems in algebraic geometry or affine varieties. "The coordinate ring of A" is another algebraic geometry concept. "The locus of an element f" relates to varieties and ideals. "The radical of the ideal I" is a theorem on radical ideals. "The associated primes for the module M" is from commutative algebra. "The support of the module M" is another support theory theorem. "The ring of fractions" refers to localization. "The localization of R at the prime ideal P" is a theorem on local rings. "The local ring and tangent space" connects to scheme theory. "The Jacobson radical" is a theorem on radical elements. "The 17th cohomology group" suggests cohomology theorems. "The fixed points of G acting on A" is a group action theorem. "The restriction and corestriction maps" relates to sheaf cohomology. "The stability group of the series" might be a more advanced topic. "The norm of the character e" could be from representation theory.
+
+Now, compiling these into theorems. Each theorem needs a name, statement, proof (if possible), subject, domain, dependencies, and type. For example, "Leading Terms Theorem" would state that the leading term of a polynomial is the term with the highest degree, and its ideal consists of all such terms. The proof might reference polynomial division. Dependencies could be on the division algorithm theorem.
+
+Another theorem is "Tensor Product Theorem" stating the properties of tensor products, like bilinearity, and its proof would use universal properties. Dependencies might include the existence of bases theorems.
+
+The "Trace Theorem" would state that the trace of a matrix is the sum of its diagonal elements, with a proof using permutation parity. Dependencies could be on permutation properties.
+
+For "Endomorphism Ring Theorem", the theorem might state that Hom(M,N) is a module over R, and the endomorphism ring structure. Proof would involve module homomorphisms.
+
+Each of these needs to be structured into the JSON format. The examples section would include examples like computing the tensor product of two modules, finding the trace of a matrix, or determining the torsion submodule. Each example references the corresponding theorem.
+
+I need to ensure all mathematical terms are correctly transcribed, using Unicode where possible. For instance, "Hom(A,B)" can be written as "Hom(A, B)". The proof fields should be concise, mentioning key steps without full proofs unless specified. Dependencies are listed as theorem names mentioned in the proof.
+
+After listing all theorems and examples, the JSON structure must be correctly formatted with proper escaping. For example, quotes inside strings need to be escaped, but since the user specified to use plain text where possible, I'll avoid LaTeX and use plain text for statements.
+
+Finally, check that all required elements are included: theorems with their details, examples with references, correct subjects and domains. Ensure no extra text is included beyond the JSON structure.
+</thought>
+
 {
-    "name": "Theorem (Fixed Points and Coefficients)",
-    "statement": "Let (G) be a group acting on a (G)-module (A). The fixed points of (G) acting on (A) are the elements of (A) that are invariant under the action of (G). The 17th cohomology group of (G) with coefficients in (A) is denoted by (H^{17}(G, A)).",
-    "proof": "Not provided",
-    "subject": "Algebra",
-    "domain": "Group Theory",
-    "dependencies": [],
-    "type": "Theorem"
-}
-],
-"examples": [
-{
-    "name": "Example: Fixed Points and Coefficients",
-    "content": "Consider the group (G = \mathbb{Z}/2\mathbb{Z}) acting on the (G)-module (A = \mathbb{Z}) by negation. The fixed points of (G) acting on (A) are the elements of (A) that are invariant under the action of (G). In this case, the only fixed point is 0. The 17th cohomology group of (G) with coefficients in (A) is (H^{17}(G, A) = 0) because (G) has period 2 and 17 is odd.",
-    "subject": "Algebra",
-    "domain": "Group Theory",
-    "illustrates_theorems": ["Theorem (Fixed Points and Coefficients)"],
-    "difficulty": "Medium"
-}
-]
-}
-2026-01-02 01:28:19,213 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 3
-2026-01-02 01:28:19,213 - base_logger - INFO - Processing chunk 4/1608
-2026-01-02 01:28:19,524 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:28:25,261 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 25 column 52 (char 650)
-2026-01-02 01:28:25,261 - base_logger - INFO - {
   "theorems": [
     {
-      "name": "Theorem 1.2.1",
-      "statement": "If (a) and (b) are integers, then (a + b) is an integer.",
-      "proof": "Not provided",
+      "name": "Leading Terms Theorem",
+      "statement": "The leading term of a polynomial ( f ) of degree ( n ) is the monomial of highest degree, and the ideal of all such leading terms is principal.",
+      "proof": "By polynomial division, every polynomial can be written as ( f = q \cdot x^k + r ), where ( \deg(r) < k ). The leading term ( q \cdot x^k ) generates the ideal of leading terms.",
       "subject": "Algebra",
-      "domain": "Number Theory",
+      "domain": "Polynomial Theory",
       "dependencies": [],
       "type": "Theorem"
     },
     {
-      "name": "Theorem 1.3.2",
-      "statement": "If (a) and (b) are integers, then (a + b = b + a).",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Number Theory",
+      "name": "Tensor Product Theorem",
+      "statement": "For modules ( M, N ), ( \\text{Hom}(M \otimes N, M \otimes N) ) is isomorphic to ( \\text{Hom}(M, N) \otimes N ).",
+      "proof": "Use universal properties of tensor products and Hom spaces.",
+      "subject": "Module Theory",
+      "domain": "Tensor Algebra",
+      "dependencies": [],
+      "type": "Theorem"
+    },
+    {
+      "name": "Trace Theorem",
+      "statement": "For a square matrix ( A ), ( \\text{tr}(A^k) = \\text{tr}(A)^k ).",
+      "proof": "Use linearity of trace and eigenvalues (if applicable).",
+      "subject": "Linear Algebra",
+      "domain": "Matrix Theory",
+      "dependencies": [],
+      "type": "Theorem"
+    },
+    {
+      "name": "Endomorphism Ring Theorem",
+      "statement": "The endomorphism ring ( \\text{End}(M) ) is isomorphic to ( M^* \otimes M^* ), where ( M^* ) is the dual module.",
+      "proof": "Use Hom( (M, M) ) and dual module properties.",
+      "subject": "Module Theory",
+      "domain": "Homological Algebra",
+      "dependencies": [],
+      "type": "Theorem"
+    },
+    {
+      "name": "Torsion Submodule Theorem",
+      "statement": "The torsion submodule ( T(M) ) of a module ( M ) is the set of elements annihilated by some non-zero ( r \in R ).",
+      "proof": "Direct sum decomposition ( M = T(M) \oplus \\text{free}(M) ).",
+      "subject": "Module Theory",
+      "domain": "Torsion Modules",
       "dependencies": [],
       "type": "Theorem"
     }
   ],
   "examples": [
     {
-      "name": "Example 1.2.3",
-      "content": "Let (G) be a group and let (a, b \in G). Then the operation of the group is defined as follows: for any (x, y \in G), (x * y = xy).",
+      "name": "Tensor Product Example",
+      "description": "Compute ( M \otimes N ) for ( M = R^2 ), ( N = R ). The result is spanned by ( e_1 \otimes 1 ) and ( e_2 \otimes 1 ).",
+      "theoremRef": ["Tensor Product Theorem"]
+    },
+    {
+      "name": "Trace Calculation",
+      "description": "Find ( \\text{tr}(A^2) ) where ( A = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}). Result: ( 2 ).",
+      "theoremRef": ["Trace Theorem"]
+    },
+    {
+      "name": "Torsion Submodule Identification",
+      "description": "For ( M = R/(x,y) ), the torsion submodule is ( (x,y) ).",
+      "theoremRef": ["Torsion Submodule Theorem"]
+    }
+  ]
+}
+2026-01-02 03:12:37,076 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 2
+2026-01-02 03:12:37,076 - base_logger - INFO - Processing chunk 3/1608
+2026-01-02 03:12:37,359 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-02 03:13:18,673 - base_logger - ERROR - JSON parsing error: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+2026-01-02 03:13:18,673 - base_logger - INFO - <thought>
+Okay, let's tackle this step by step. The user wants me to extract all mathematical theorems, lemmas, propositions, etc., from the given text. The text mentions several concepts like fixed points of a group action, cohomology groups, restriction maps, stability groups, norms of characters, and induced representations. 
+
+First, I need to identify each mathematical concept mentioned. Let's go through each term:
+
+1. **Fixed points of G acting on the G-module A**: This sounds like a theorem related to group actions on modules. The theorem might be about the existence or properties of fixed points under such actions. The subject here would be Algebra, specifically Group Theory or Module Theory.
+
+2. **The 17th cohomology group of G with coefficients in A**: This is a cohomology group, so it's part of Algebra, specifically Homology or Cohomology. The theorem here could be about the structure of cohomology groups, their properties, or calculations involving the 17th degree.
+
+3. **Restriction, and corestriction maps on cohomology**: These are maps in cohomology, so theorems related to their properties, such as exact sequences, naturality, or specific computations. The subject would still be Algebra, Cohomology.
+
+4. **Stability group of the series l\u2294A\u2294G**: Stability groups are part of representation theory or algebraic geometry. The theorem might involve the definition and properties of stability groups, perhaps in the context of Grothendieck groups or derived categories.
+
+5. **Norm of the character e**: Characters in representation theory have norms, so this could relate to the norm of a representation, or the norm of a character in the context of group characters. The theorem might involve calculating norms or their properties.
+
+6. **Character of the representation 1/f induced from H to G**: This refers to induced representations. The theorem could be about the properties of induced characters, their decomposition, or relation to other cohomology groups mentioned earlier.
+
+Now, I need to structure each of these into theorems or propositions. Each of these points might be a theorem. For example:
+
+- Theorem: Fixed points under a group action on a module are either trivial or the entire module. (Hypothesis: G acts on A, etc.)
+- Theorem: The 17th cohomology group H^17(G, A) has a certain structure.
+- Theorem: The restriction map Res: H^k(G, A) \u2192 H^k(G', A') is a homomorphism.
+- Theorem: The stability group of the derived category of A\u2294G is well-defined.
+- Theorem: The norm of a character e is equal to the order of the group divided by the dimension of the representation.
+- Theorem: The induced character \u03c7^f from H to G has properties described by the induction functor.
+
+Each theorem needs a name, statement, proof reference, subject, domain, dependencies, and type. Since the text doesn't provide explicit proofs, the proof field will be "Not provided". Dependencies might be other theorems mentioned, but without more context, it's hard to specify, so maybe leave them empty or assume they depend on basic group theory.
+
+Examples would be instances where these theorems apply. For example, an example showing fixed points in a specific group action, computing the 17th cohomology for a particular group and module, illustrating restriction maps in a specific case, etc. Each example should reference the theorems it illustrates.
+
+I need to ensure that all terms are correctly classified under subjects and domains. For instance, cohomology groups fall under Algebra > Cohomology, while stability groups might be under Algebra > Representation Theory.
+
+Also, the user mentioned using Unicode symbols where possible, like \u2200 for "for all" in statements. However, since the statements are in plain text, I can write them directly without LaTeX. For example, "If G acts on A, then the fixed points form a G-module."
+
+Now, compiling all this into the JSON structure. The theorems array will have each theorem with their details. The examples array will have each example with their content and referenced theorems.
+
+I need to make sure dependencies are correctly listed if possible. Since the text mentions "restriction and corestriction maps", perhaps the theorem on cohomology maps depends on the general cohomology theory, so dependencies might include "Cohomology Basics" or similar, but since we don't have that, maybe leave as empty or omit.
+
+Finally, check for any missing elements. The user wants all theorems and examples, so each mentioned concept should be a theorem unless it's too vague. Examples might be harder, but since the text doesn't provide specific examples, perhaps leave examples empty or create generic ones based on the theorems.
+
+Wait, the user's instruction says to extract examples from the text. The given text doesn't have explicit examples, so maybe the examples array is empty. But the user says "Extract BOTH theorems AND examples", so perhaps the examples are implied by the theorems. Alternatively, maybe the examples are the applications mentioned, like "the norm of the character e" as an example of a character norm theorem.
+
+Alternatively, perhaps each theorem can have an example that illustrates it. For instance, the theorem on fixed points could have an example with a specific group and module. But without specific data, maybe the examples are just placeholders referencing the theorems.
+
+Hmm, the user might expect that each theorem listed has an example that demonstrates it. Since the original text doesn't provide explicit examples, perhaps the examples are constructed based on standard cases. For example, for the fixed points theorem, an example could be the trivial group acting on a module, where all elements are fixed points.
+
+Alternatively, maybe the examples are not present in the text, so the examples array remains empty. The user's instruction says "Extract BOTH theorems AND examples from the text below." Since the text doesn't have examples, perhaps the examples array is empty. But the user might expect that the examples are the theorems themselves, but that's not correct. The examples should be separate instances.
+
+Alternatively, maybe the examples are the applications mentioned in the text. For instance, the mention of "the norm of the character e" could be an example of a theorem about character norms. So each theorem's example would reference itself, but that might not be correct.
+
+This is a bit ambiguous. Since the text provided doesn't include explicit examples, perhaps the examples array is left empty. However, the user might expect that each theorem has an example, so maybe create minimal examples based on standard cases.
+
+Alternatively, perhaps the examples are the concepts themselves. For example, the 17th cohomology group is an example of a cohomology group. But the user wants examples to be separate entries in the JSON.
+
+Given the ambiguity, I'll proceed by creating theorems for each mentioned concept and leave the examples empty unless I can infer standard examples. Since the user's example response includes examples, maybe I should include some.
+
+Wait, looking back at the user's example response, they have a JSON with theorems and examples. The user's instruction says to extract examples from the text. Since the text doesn't have explicit examples, perhaps the examples are the theorems themselves, but that's not right. Alternatively, maybe the examples are the applications mentioned in the text. For instance, the restriction maps could be an example of a cohomology map.
+
+Alternatively, perhaps the examples are the specific instances mentioned, like "the norm of the character e" as an example of a character norm theorem. So each theorem's example would be an instance of it.
+
+In that case, each theorem can have an example entry that references itself. But the examples array should contain entries that are separate from the theorems. Hmm.
+
+Alternatively, maybe the examples are separate entries. For example, the theorem about fixed points could have an example like "When G is the trivial group, all elements of A are fixed points." So the example's content would be that statement with proof.
+
+But since the original text doesn't provide these, perhaps it's better to leave the examples array empty. However, the user's instruction says to extract examples from the text, so if there are none, the examples array is empty.
+
+Alternatively, maybe the user expects that each theorem listed also has an example in the text. Since the text is just a list of terms, perhaps the examples are the terms themselves. But that's not correct.
+
+Given the ambiguity, I'll proceed by creating theorems for each mentioned concept and leave the examples array empty, as there's no explicit example data in the input text.
+
+Now, structuring each theorem:
+
+1. **Fixed Points Theorem**:
+   - Name: Fixed Points Under Group Action
+   - Statement: If a group G acts on a G-module A, then the set of fixed points {a \u2208 A | g·a = a for all g \u2208 G} forms a G-submodule of A.
+   - Subject: Algebra > Module Theory
+   - Domain: Algebra
+   - Dependencies: [] (assuming basic group action principles)
+   - Type: Theorem
+
+2. **17th Cohomology Group Theorem**:
+   - Name: Structure of the 17th Cohomology Group
+   - Statement: For a group G and a G-module A, the 17th cohomology group H^17(G, A) is a finite abelian group if A is finite.
+   - Subject: Algebra > Cohomology
+2026-01-02 03:13:18,674 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 3
+2026-01-02 03:13:18,674 - base_logger - INFO - Processing chunk 4/1608
+2026-01-02 03:13:19,045 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-02 03:13:31,472 - base_logger - INFO - there is 2 entire
+2026-01-02 03:13:31,472 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 4
+2026-01-02 03:13:31,472 - base_logger - INFO - Processing chunk 5/1608
+2026-01-02 03:13:31,747 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-01-02 03:14:13,812 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 14 column 26 (char 431)
+2026-01-02 03:14:13,812 - base_logger - INFO - <thought>
+Okay, let's tackle this step by step. The user wants me to extract all mathematical theorems, lemmas, propositions, etc., from the provided text. First, I need to carefully read through the text to identify these elements. The text is about group theory, quotient groups, homomorphisms, and related topics. 
+
+Starting with the chapters and sections, I notice that each chapter has definitions and theorems. For example, Chapter 3 starts with Quotient Groups and Homomorphisms. The sections 3.1 to 3.5 likely contain theorems. The key theorems here would be things like Lagrange's Theorem, the First Isomorphism Theorem, properties of cosets, etc. 
+
+Looking at the definitions and examples section (3.1), there's mention of cosets and Lagrange's Theorem. That's a crucial theorem. The statement would be that the order of a subgroup divides the order of the group. The proof would involve counting elements in cosets. 
+
+In 3.2, there's more on cosets and Lagrange's Theorem. Maybe this section elaborates on the proof or provides examples. The example here could be showing that if G is a group of order n and H a subgroup, then n/|H| must be an integer, with an example like S3 and a subgroup of order 2. 
+
+3.3 might discuss homomorphisms between groups. The theorem here could be the First Isomorphism Theorem, stating that if \u03c6: G \u2192 H is a homomorphism, then G/ker\u03c6 \u2245 im\u03c6. The proof would involve showing the isomorphism between the quotient group and the image. 
+
+3.4 could be about the composition of homomorphisms or properties like kernel being a normal subgroup. The example might involve composing two homomorphisms and showing the kernel is the intersection of kernels. 
+
+3.5 might cover the isomorphism theorems in more depth, perhaps the second isomorphism theorem (the normalizer theorem). The example here could be proving that (NH)/H \u2245 N/(N \u2229 H), using specific groups like S3 and a normal subgroup. 
+
+Moving to Chapter 4, which deals with group actions. The sections here would include Cayley's theorem (every group acts on itself by left multiplication), the class equation, and perhaps the orbit-stabilizer theorem. 
+
+In 4.1, the chapter starts with group actions and permutation representations. The theorem here could be Cayley's theorem stating every group is isomorphic to a permutation group. The example would be showing S3 acting on itself by conjugation, leading to the symmetric group's structure. 
+
+4.2 might discuss the class equation, which counts the number of elements in conjugacy classes. The example could involve calculating the class equation for a specific group like S4. 
+
+4.3 and 4.4 could be about group actions on themselves by conjugation, leading to the concept of normal subgroups. The example here might show that conjugation preserves the group structure, hence forming a normal subgroup. 
+
+Chapter 5 covers equation groups, automorphisms, Sylow theorems, and direct/semidirect products. The Sylow theorems are key here. The first Sylow theorem states existence of subgroups of certain orders, the second about conjugation of subgroups, and the third about the number of subgroups. 
+
+In 5.1, the equation group (maybe referring to the group of solutions to an equation) could have theorems about its structure. The example might involve solving equations in specific groups. 
+
+The Sylow theorems (5.3) would be major theorems here. The first Sylow theorem's statement is that for a finite group G of order p^n * m (p prime), there exists a subgroup of order p^k for each k up to n. The proof would use Cauchy's theorem. The example could be showing existence in S5 for a subgroup of order 25. 
+
+The Fundamental Theorem of Finitely Generated Abelian Groups (5.2) is another critical theorem. Its statement is that every finitely generated abelian group is a direct product of cyclic groups. The example would decompose a given group into its invariant factors. 
+
+Chapter 6 deals with further group theory topics like p-groups, nilpotent groups, solvable groups. The theorem here could be the characterization of nilpotent groups via the upper central series. An example might involve showing a specific group is nilpotent. 
+
+Chapter 7 covers polynomial rings, matrix rings, group actions, and ring homomorphisms. The Chinese Remainder Theorem (6.5) is a key theorem here, stating that for ideals coprime, the product map is surjective with kernel the intersection. The example would involve rings like Z/6Z and Z/9Z. 
+
+Now, compiling all these into theorems and examples. Each theorem needs a name, statement, proof reference, subject, domain, dependencies, and type. Examples should reference the theorems they illustrate, with content showing the worked-out example. 
+
+I need to ensure that dependencies are correctly listed based on the order in the text. For instance, Lagrange's Theorem (3.1) might depend on the definition of subgroup order. The First Isomorphism Theorem (3.3) might depend on the definition of homomorphisms. 
+
+Also, examples should be detailed with their solutions. For example, an example in 3.2 could compute the order of a subgroup and verify Lagrange's condition. 
+
+I must avoid adding any extra text, just the JSON structure with the extracted items. Each theorem's proof field can note where the proof is given (like "3.1") or "Not provided" if not specified. Dependencies are the theorems cited in the proof. 
+
+Finally, check that all mathematical statements are in plain text or Unicode, no LaTeX. For instance, the statement for Lagrange's Theorem would be "If G is a finite group and H a subgroup, then |G| is divisible by |H|." 
+
+Once all elements are identified and structured, assemble them into the JSON format as specified, ensuring correct escaping and proper arrays and objects.
+</thought>
+
+{
+  "theorems": [
+    {
+      "name": "Lagrange's Theorem",
+      "statement": "If ( G ) is a finite group and ( H ) a subgroup, then ( |G| ) is divisible by ( |H| ).",
+      "proof": "Refer to Section 3.1 for proof details.",
       "subject": "Group Theory",
-      "domain": "Abstract Algebra",
-      "illustrates_theorems": ["Theorem 1.2.1", "Theorem 1.3.2"],
-      "difficulty": "Easy"
-    }
-  ]
-}
-2026-01-02 01:28:25,261 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 4
-2026-01-02 01:28:25,262 - base_logger - INFO - Processing chunk 5/1608
-2026-01-02 01:28:25,481 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:28:43,850 - base_logger - INFO - there is 2 entire
-2026-01-02 01:28:43,851 - base_logger - WARNING - Invalid difficulty 'Not provided', defaulting to 'Medium'
-2026-01-02 01:28:43,851 - base_logger - WARNING - Invalid difficulty 'Not provided', defaulting to 'Medium'
-2026-01-02 01:28:43,851 - base_logger - WARNING - Invalid difficulty 'Not provided', defaulting to 'Medium'
-2026-01-02 01:28:43,851 - base_logger - WARNING - Invalid difficulty 'Not provided', defaulting to 'Medium'
-2026-01-02 01:28:43,851 - base_logger - INFO - Extracted 12 theorems and 4 examples from chunk 5
-2026-01-02 01:28:43,851 - base_logger - INFO - Processing chunk 6/1608
-2026-01-02 01:28:44,062 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:28:59,806 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 70 column 42 (char 2644)
-2026-01-02 01:28:59,807 - base_logger - INFO - ```json
-{
-  "theorems": [
-    {
-      "name": "Euclidean Domain Theorem",
-      "statement": "A Euclidean domain is a ring in which there exists a Euclidean function that allows us to perform division with remainder.",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
+      "domain": "Algebraic Structures",
       "dependencies": [],
       "type": "Theorem"
     },
     {
-      "name": "Principal Ideal Domain Theorem",
-      "statement": "A principal ideal domain is an integral domain in which every ideal is a principal ideal.",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
+      "name": "First Isomorphism Theorem",
+      "statement": "If ( \phi: G \\to H ) is a group homomorphism, then ( G/\ker(\phi) \cong \\text{im}(\phi) ).",
+      "proof": "Refer to Section 3.3 for proof details.",
+      "subject": "Group Theory",
+      "domain": "Algebraic Structures",
       "dependencies": [],
       "type": "Theorem"
     },
     {
-      "name": "Unique Factorization Domain Theorem",
-      "statement": "A unique factorization domain is an integral domain in which every non-zero element can be written as a product of irreducible elements, uniquely up to order and units.",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
+      "name": "Second Isomorphism Theorem (Dedekind's Theorem)",
+      "statement": "If ( H ) is a subgroup of ( G ), then ( H \\triangle H = NH/H ), where ( N = NH ).",
+      "proof": "Refer to Section 3.5 for proof details.",
+      "subject": "Group Theory",
+      "domain": "Algebraic Structures",
       "dependencies": [],
       "type": "Theorem"
     },
     {
-      "name": "Definition of Polynomial Rings",
-      "statement": "A polynomial ring is a ring formed by polynomials in one or more variables with coefficients from a given ring.",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
-      "dependencies": [],
-      "type": "Definition"
-    },
-    {
-      "name": "Irreducibility Criteria Theorem",
-      "statement": "A polynomial over a field is irreducible if it cannot be factored into the product of two non-constant polynomials over the same field.",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
+      "name": "Cayley's Theorem",
+      "statement": "Every group ( G ) is isomorphic to a permutation group.",
+      "proof": "Refer to Section 4.1 for proof details.",
+      "subject": "Group Theory",
+      "domain": "Algebraic Structures",
       "dependencies": [],
       "type": "Theorem"
     },
     {
-      "name": "Module Theory Introduction",
-      "statement": "A module is a generalization of the notion of a vector space over a field, but instead over a ring.",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
-      "dependencies": [],
-      "type": "Definition"
-    },
-    {
-      "name": "Exact Sequences-Projective, Injective, and Flat Modules Theorem",
-      "statement": "A short exact sequence of modules is a sequence of module homomorphisms between modules such that the image of one homomorphism is the kernel of the next.",
-      "proof": "Not provided",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
-      "dependencies": [],
-      "type": "Theorem"
-    }
-  ],
-  "examples": [
-    {
-      "name": "Example: Euclidean Domain",
-      "content": "The ring of integers ( \mathbb{Z} ) is a Euclidean domain with the Euclidean function being the absolute value function.",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
-      "illustrates_theorems": ["Euclidean Domain Theorem"],
-      "difficulty": "Easy"
-    },
-    {
-      "name": "Example: Principal Ideal Domain",
-      "content": "The ring of polynomials ( \mathbb{Z}[x] ) is a principal ideal domain.",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
-      "illustrates_theorems": ["Principal Ideal Domain Theorem"],
-      "difficulty": "Easy"
-    },
-    {
-      "name": "Example: Unique Factorization Domain",
-      "content": "The ring of integers ( \mathbb{Z} ) is a unique factorization domain.",
-      "subject": "Algebra",
-      "domain": "Abstract Algebra",
-      "illustrates_theorems": ["Unique Factorization Domain Theorem"],
-      "difficulty": "Easy"
-    }
-  ]
-}
-```
-2026-01-02 01:28:59,807 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 6
-2026-01-02 01:28:59,807 - base_logger - INFO - Processing chunk 7/1608
-2026-01-02 01:29:00,116 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:29:39,379 - base_logger - ERROR - JSON parsing error: Expecting ',' delimiter: line 254 column 6 (char 7301)
-2026-01-02 01:29:39,379 - base_logger - INFO - ```json
-{
-  "theorems": [
-    {
-      "name": "Theorem 13.1",
-      "statement": "Basic Theory of Field Extensions",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": "Field extensions",
+      "name": "Sylow Theorems",
+      "statement": "1. Existence of Sylow ( p )-subgroups. 2. Conjugacy of Sylow subgroups. 3. Number of Sylow ( p )-subgroups divisibility.",
+      "proof": "Refer to Section 5.3 for proofs.",
+      "subject": "Group Theory",
+      "domain": "Algebraic Structures",
       "dependencies": [],
       "type": "Theorem"
     },
     {
-      "name": "Theorem 13.2",
-      "statement": "Algebraic Extensions",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": "Field extensions",
+      "name": "Fundamental Theorem of Finitely Generated Abelian Groups",
+      "statement": "Every finitely generated abelian group is a direct sum of cyclic groups.",
+      "proof": "Refer to Section 5.2 for proof details.",
+      "subject": "Group Theory",
+      "domain": "Algebraic Structures",
       "dependencies": [],
       "type": "Theorem"
     },
     {
-      "name": "Theorem 13.3",
-      "statement": "Classical Straightedge and Compass Constructions",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": "Classical constructions",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.4",
-      "statement": "Splitting Fields and Algebraic Closures",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": "Splitting fields",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.5",
-      "statement": "Separable and Inseparable Extensions",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": " field extensions",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.6",
-      "statement": "Cyclotomic Polynomials and Extensions",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": " Cyclotomic polynomials",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.7",
-      "statement": "Galois Theory",
-      "proof": "Not provided",
-      "subject": "Galois Theory",
-      "domain": "Galois theory",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.8",
-      "statement": "Basic Definitions",
-      "proof": "Not provided",
-      "subject": "Galois Theory",
-      "domain": "Basic definitions",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.9",
-      "statement": "The Fundamental Theorem of Galois Theory",
-      "proof": "Not provided",
-      "subject": "Galois Theory",
-      "domain": "Fundamental theorem",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.10",
-      "statement": "Finite Fields",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": "Finite fields",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.11",
-      "statement": "Composite Extensions and Simple Extensions",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": " field extensions",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.12",
-      "statement": "Cyclotomic Extensions and Abelian Extensions over Q",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": " Cyclotomic extensions",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.13",
-      "statement": "Galois Groups of Polynomials",
-      "proof": "Not provided",
-      "subject": "Galois Theory",
-      "domain": "Galois groups",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.14",
-      "statement": "Solvable and Radical Extensions: lnsolvability ofthe Quintic",
-      "proof": "Not provided",
-      "subject": "Galois Theory",
-      "domain": "Radical extensions",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.15",
-      "statement": "Computation of Galois Groups over Q",
-      "proof": "Not provided",
-      "subject": "Galois Theory",
-      "domain": "Galois groups computation",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 13.16",
-      "statement": "Transcendental Extensions, Inseparable extensions, Infinite Galois Groups",
-      "proof": "Not provided",
-      "subject": "Field Theory",
-      "domain": "Infinite Galois groups",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 15.1",
-      "statement": "Commutative Rings and Algebraic Geometry",
-      "proof": "Not provided",
-      "subject": "Commutative rings",
-      "domain": "Algebraic geometry",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 15.2",
-      "statement": "Noetherian Rings and Affine Algebraic Sets",
-      "proof": "Not provided",
-      "subject": "Commutative rings",
-      "domain": "Affine algebraic sets",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 15.3",
-      "statement": "Radicals and Affine Varieties",
-      "proof": "Not provided",
-      "subject": "Algebraic geometry",
-      "domain": "Radicals",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 15.4",
-      "statement": "Integral Extensions and Hilbert's Nullstellensatz",
-      "proof": "Not provided",
-      "subject": "Commutative rings",
-      "domain": " Integral extensions",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 16.1",
-      "statement": "Artinian Rings, Discrete Valuation Rings, and Dedekind Domains",
-      "proof": "Not provided",
-      "subject": "Commutative rings",
-      "domain": "Artinian rings",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.1",
-      "statement": "Introduction to Homological Algebra and Group Cohomology",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Group cohomology",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.2",
-      "statement": "Introduction to Homological Algebra-Ext and Tor",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Ext and Tor",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.3",
-      "statement": "Introduction to Homological Algebra-Ext and Tor",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Ext and Tor",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.4",
-      "statement": "Introduction to Homological Algebra-Ext and Tor",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Ext and Tor",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.5",
-      "statement": "Introduction to Homological Algebra-Ext and Tor",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Ext and Tor",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.6",
-      "statement": "Introduction to Homological Algebra-Ext and Tor",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Ext and Tor",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.7",
-      "statement": "Introduction to Homological Algebra-Ext and Tor",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Ext and Tor",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 17.8",
-      "statement": "Introduction to Homological Algebra-Ext and Tor",
-      "proof": "Not provided",
-      "subject": "Homological algebra",
-      "domain": "Ext and
-2026-01-02 01:29:39,379 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 7
-2026-01-02 01:29:39,379 - base_logger - INFO - Processing chunk 8/1608
-2026-01-02 01:29:39,818 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:29:43,730 - base_logger - INFO - there is 2 entire
-2026-01-02 01:29:43,731 - base_logger - INFO - Extracted 1 theorems and 1 examples from chunk 8
-2026-01-02 01:29:43,731 - base_logger - INFO - Processing chunk 9/1608
-2026-01-02 01:29:43,856 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:29:44,130 - base_logger - INFO - there is 2 entire
-2026-01-02 01:29:44,130 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 9
-2026-01-02 01:29:44,130 - base_logger - INFO - Processing chunk 10/1608
-2026-01-02 01:29:44,423 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:29:44,700 - base_logger - INFO - there is 2 entire
-2026-01-02 01:29:44,700 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 10
-2026-01-02 01:29:44,700 - base_logger - INFO - Processing chunk 11/1608
-2026-01-02 01:29:44,829 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:29:45,065 - base_logger - INFO - there is 2 entire
-2026-01-02 01:29:45,065 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 11
-2026-01-02 01:29:45,065 - base_logger - INFO - Processing chunk 12/1608
-2026-01-02 01:29:45,330 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:29:45,680 - base_logger - INFO - there is 2 entire
-2026-01-02 01:29:45,680 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 12
-2026-01-02 01:29:45,680 - base_logger - INFO - Processing chunk 13/1608
-2026-01-02 01:29:45,966 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:29:54,532 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 5 column 104 (char 170)
-2026-01-02 01:29:54,532 - base_logger - INFO - ```json
-{
-  "theorems": [
-    {
-      "name": "Theorem about set mapping",
-      "statement": "If (A_1) and (A_2) are disjoint subsets of a set (A), then the function (f: A \\to \{0, 1\}) defined by (f(a) = 0) for (a \in A_1) and (f(a) = 1) for (a \in A_2) is well-defined and unique.",
-      "proof": "The function (f) is well-defined because (A_1) and (A_2) are disjoint, so each element of (A) maps to either 0 or 1 without ambiguity. The uniqueness of (f) follows from the fact that if there were another function (g: A \\to \{0, 1\}) with the same properties, then for every (a \in A), (g(a)) would have to be equal to (f(a)), implying (f = g).",
-      "subject": "Set theory and functions",
-      "domain": "Set theory",
-      "dependencies": [],
-      "type": "Theorem"
-    }
-  ],
-  "examples": [
-    {
-      "name": "Example of a function with domain partitioned into two disjoint sets",
-      "content": "Let (A = \{1, 2, 3, 4\}), (A_1 = \{1, 2\}), and (A_2 = \{3, 4\}). Define the function (f: A \\to \{0, 1\}) by (f(1) = f(2) = 0) and (f(3) = f(4) = 1). This function is well-defined and maps (A_1) to 0 and (A_2) to 1.",
-      "subject": "Set theory and functions",
-      "domain": "Set theory",
-      "illustrates_theorems": ["Theorem about set mapping"],
-      "difficulty": "Easy"
-    }
-  ]
-}
-```
-2026-01-02 01:29:54,532 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 13
-2026-01-02 01:29:54,532 - base_logger - INFO - Processing chunk 14/1608
-2026-01-02 01:29:54,672 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:30:00,993 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 25 column 30 (char 709)
-2026-01-02 01:30:00,993 - base_logger - INFO - {
-"theorems": [
-    {
-        "name": "Theorem",
-        "statement": "If (f : A \\to B) is bijective, then it is both injective and surjective.",
-        "proof": "Not provided",
-        "subject": "Algebra",
-        "domain": "Set Theory",
-        "dependencies": [],
-        "type": "Theorem"
-    },
-    {
-        "name": "Corollary",
-        "statement": "If (f : A \\to B) is injective and surjective, then it is bijective.",
-        "proof": "Not provided",
-        "subject": "Algebra",
-        "domain": "Set Theory",
-        "dependencies": ["Theorem"],
-        "type": "Corollary"
-    }
-],
-"examples": [
-    {
-        "name": "Example: Inverse of a Bijective Function",
-        "content": "Let (f : \{1, 2, 3\} \\to \{a, b, c\}) be defined by (f(1) = a), (f(2) = b), and (f(3) = c). Find the inverse function (g : B \\to A) such that (g(f(x)) = x) for all (x \in A) and (f(g(y)) = y) for all (y \in B).",
-        "subject": "Set Theory",
-        "domain": "Function Theory",
-        "illustrates_theorems": ["Theorem", "Corollary"],
-        "difficulty": "Medium"
-    }
-]
-}
-2026-01-02 01:30:00,993 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 14
-2026-01-02 01:30:00,993 - base_logger - INFO - Processing chunk 15/1608
-2026-01-02 01:30:01,275 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:30:05,753 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 16 column 27 (char 360)
-2026-01-02 01:30:05,753 - base_logger - INFO - {
-"theorems": [
-{
-    "name": "Theorem 2.1",
-    "statement": "A permutation of a set ( A ) is simply a bijection from ( A ) to itself.",
-    "proof": "Not provided",
-    "subject": "Algebra",
-    "domain": "Permutations and Bijections",
-    "dependencies": [],
-    "type": "Theorem"
-}
-],
-"examples": [
-{
-    "name": "Example 2.1.1",
-    "content": "Let ( A = \{1, 2, 3\} ). The permutation ( (1 \, 2 \, 3) ) can be written as the bijection ( f: A \\to A ) where ( f(1) = 2 ), ( f(2) = 3 ), and ( f(3) = 1 ).",
-    "subject": "Permutations and Bijections",
-    "domain": "Algebra",
-    "illustrates_theorems": ["Theorem 2.1"],
-    "difficulty": "Easy"
-}
-]
-}
-2026-01-02 01:30:05,753 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 15
-2026-01-02 01:30:05,753 - base_logger - INFO - Processing chunk 16/1608
-2026-01-02 01:30:06,056 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:30:09,032 - base_logger - INFO - there is 2 entire
-2026-01-02 01:30:09,032 - base_logger - WARNING - Invalid type 'Theorem, Lemma, Proposition, Corollary, Conjecture, Definition, property or Hypothesis', defaulting to 'Theorem'
-2026-01-02 01:30:09,032 - base_logger - WARNING - Invalid difficulty 'N/A', defaulting to 'Medium'
-2026-01-02 01:30:09,032 - base_logger - INFO - Extracted 1 theorems and 1 examples from chunk 16
-2026-01-02 01:30:09,032 - base_logger - INFO - Processing chunk 17/1608
-2026-01-02 01:30:09,298 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:30:15,319 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 5 column 36 (char 118)
-2026-01-02 01:30:15,319 - base_logger - INFO - ```json
-{
-    "theorems": [
-        {
-            "name": "Theorem (Euclidean Algorithm)",
-            "statement": "If (a, b \in \mathbb{Z} - \{0\}), then there exists a sequence of quotients and remainders as described, where the last nonzero remainder (r_n) is the greatest common divisor (gcd) of (a) and (b).",
-            "proof": "Not provided",
-            "subject": "Number Theory",
-            "domain": "Algebra",
-            "dependencies": ["Theorem (Division Algorithm)"],
-            "type": "Theorem"
-        }
-    ],
-    "examples": [
-        {
-            "name": "Example: Euclidean Algorithm for 57970 and 10353",
-            "content": "57970 = (5)10353 + 6205\\n10353 = (1)6205 + 4148\\n6205 = (1)4148 + 2057\\n4148 = (2)2057 + 34\\n2057 = (60)34 + 17\\n34 = (2)17",
-            "subject": "Number Theory",
-            "domain": "Algebra",
-            "illustrates_theorems": ["Theorem (Euclidean Algorithm)"],
-            "difficulty": "Medium"
-        }
-    ]
-}
-```
-2026-01-02 01:30:15,319 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 17
-2026-01-02 01:30:15,319 - base_logger - INFO - Processing chunk 18/1608
-2026-01-02 01:30:15,670 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:30:21,796 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 5 column 168 (char 243)
-2026-01-02 01:30:21,796 - base_logger - INFO - ```json
-{
-  "theorems": [
-    {
-      "name": "Theorem on the Euclidean Algorithm",
-      "statement": "If (a) and (b) are integers with (a > b), then the greatest common divisor of (a) and (b) is the same as the greatest common divisor of (b) and (a \mod b).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Algebra",
-      "dependencies": ["Theorem on the Euclidean Algorithm"],
-      "type": "Theorem"
-    }
-  ],
-  "examples": [
-    {
-      "name": "Example: Solving for the Greatest Common Divisor using the Euclidean Algorithm",
-      "content": "Given (a = 57970) and (b = 10353), we use the Euclidean Algorithm to find their greatest common divisor (GCD). The GCD is found to be 17. The steps involve repeatedly applying the division algorithm until the remainder is zero. The last non-zero remainder is the GCD. The solution to (ax + by = (a, b)) is also provided as an example of how the GCD can be expressed as a linear combination of (a) and (b).",
-      "subject": "Number Theory",
-      "domain": "Algebra",
-      "illustrates_theorems": ["Theorem on the Euclidean Algorithm"],
-      "difficulty": "Medium"
-    }
-  ]
-}
-```
-2026-01-02 01:30:21,797 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 18
-2026-01-02 01:30:21,797 - base_logger - INFO - Processing chunk 19/1608
-2026-01-02 01:30:21,951 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:30:26,190 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 16 column 96 (char 508)
-2026-01-02 01:30:26,190 - base_logger - INFO - {
-"theorems": [
-{
-    "name": "Theorem ( Fundamental Theorem of Arithmetic )",
-    "statement": "Every integer greater than 1 can be uniquely factored into primes, up to the order of the factors.",
-    "proof": "Not provided",
-    "subject": "Number Theory",
-    "domain": "Arithmetic",
-    "dependencies": [],
-    "type": "Theorem"
-}
-],
-"examples": [
-{
-    "name": "Example: Unique Factorization of 1852423848",
-    "content": "Given ( n = 1852423848 ), it can be uniquely factored into primes as ( n = 2^3 \cdot 3^2 \cdot 19331^2 ). This factorization is unique up to the order of the factors.",
-    "subject": "Number Theory",
-    "domain": "Arithmetic",
-    "illustrates_theorems": ["Theorem ( Fundamental Theorem of Arithmetic )"],
-    "difficulty": "Easy"
-}
-]
-}
-2026-01-02 01:30:26,190 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 19
-2026-01-02 01:30:26,190 - base_logger - INFO - Processing chunk 20/1608
-2026-01-02 01:30:26,500 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:30:41,576 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 14 column 217 (char 698)
-2026-01-02 01:30:41,576 - base_logger - INFO - ```json
-{
-  "theorems": [
-    {
-      "name": "Theorem on GCD and LCM",
-      "statement": "For any two integers (a) and (b), their greatest common divisor (GCD) and least common multiple (LCM) satisfy the relationship ( \\text{GCD}(a, b) \\times \\text{LCM}(a, b) = a \\times b ).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Arithmetic",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem on Euclidean Algorithm",
-      "statement": "The Euclidean algorithm is an efficient method for computing the greatest common divisor (GCD) of two integers (a) and (b). It is based on the principle that (\\text{GCD}(a, b) = \\text{GCD}(b, a \mod b)).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Algorithms",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Definition of Euler's Totient Function",
-      "statement": "For a positive integer (n), the Euler's totient function (\phi(n)) is defined as the number of integers from 1 to (n) that are coprime to (n). It can be expressed as (\phi(n) = n \prod_{p|n} \left(1 - \frac{1}{p}\right)), where the product is over all distinct prime numbers dividing (n).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Arithmetic",
-      "dependencies": [],
-      "type": "Theorem"
-    }
-  ],
-  "examples": [
-    {
-      "name": "Example on GCD and LCM",
-      "content": "In the example above, (a = 57970) and (b = 10353) can be factored as (a = 2 \cdot 5 \cdot 11 \cdot 17 \cdot 31) and (b = 3 \cdot 7 \cdot 17 - 29). From this, we can immediately conclude that their greatest common divisor is 17. Note, however, that for large integers it is extremely difficult to determine their prime factorizations (several common codes in current use are based on this difficulty, in fact), so that this is not an effective method to determine greatest common divisors in general. The Euclidean Algorithm will produce greatest common divisors quite rapidly without the need for the prime factorization of (a) and (b).",
-      "subject": "Number Theory",
-      "domain": "Arithmetic",
-      "illustrates_theorems": ["Theorem on GCD and LCM", "Theorem on Euclidean Algorithm"],
-      "difficulty": "Medium"
-    },
-    {
-      "name": "Example on Euler's Totient Function",
-      "content": "For (n = p^k), the formula for (\phi(n)) is given by (\phi(p^k) = p^{k-1}(p - 1)). For example, (\phi(12) = \phi(2^2 \cdot 3) = 2^{2-1}(2 - 1) \cdot (3 - 1) = 4.)",
-      "subject": "Number Theory",
-      "domain": "Arithmetic",
-      "illustrates_theorems": ["Definition of Euler's Totient Function"],
-      "difficulty": "Easy"
-    }
-  ]
-}
-```
-2026-01-02 01:30:41,576 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 20
-2026-01-02 01:30:41,576 - base_logger - INFO - Processing chunk 21/1608
-2026-01-02 01:30:41,855 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:31:20,389 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 23 column 43 (char 1062)
-2026-01-02 01:31:20,389 - base_logger - INFO - ```json
-{
-  "theorems": [
-    {
-      "name": "Theorem 3",
-      "statement": "If (n) is composite, then there are integers (a) and (b) such that (n) divides (ab) but (n) does not divide either (a) or (b).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Divisibility and Composite Numbers",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 4",
-      "statement": "Let (a), (b) and (N) be fixed integers with (a) and (b) nonzero, and let (d = (a, b)) be the greatest common divisor of (a) and (b). Suppose (x_0) and (y_0) are particular solutions to (ax + by = N) (i.e., (ax_0 + by_0 = N)). Prove that for any integer (t), the integers (X = x_0 + dt) and (Y = y_0 - d t) are also solutions to (ax + by = N) (this is in fact the general solution).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Diophantine Equations",
-      "dependencies": ["Theorem 3"],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 5",
-      "statement": "Determine the value ( \phi(n) ) for each integer ( n \leq 30 ) where ( \phi ) denotes the Euler's totient function.",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Euler's Totient Function",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 6",
-      "statement": "Prove the Well Ordering Property of ( \mathbb{Z} ) by induction and prove the minimal element is unique.",
-      "proof": "Not provided",
-      "subject": "Set Theory",
-      "domain": "Ordering and Induction",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 7",
-      "statement": "If (p) is a prime, prove that there do not exist nonzero integers (a) and (b) such that (a^2 = pb^2) (i.e., ( \sqrt{p} ) is not a rational number).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Irrationality of Square Roots",
-      "dependencies": ["Theorem 6"],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 8",
-      "statement": "Let (p) be a prime, (n \in \mathbb{Z}^+). Find a formula for the largest power of (p) which divides (n!) (it involves the greatest integer function).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Factorials and Prime Factorization",
-      "dependencies": ["Theorem 7"],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 9",
-      "statement": "Write a computer program to determine the greatest common divisor ((a, b)) of two integers (a) and (b) and to express ((a, b)) in the form (ax + by) for some integers (x) and (y).",
-      "proof": "Not provided",
-      "subject": "Computer Science and Number Theory",
-      "domain": "Algorithms and GCD",
-      "dependencies": [],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 10",
-      "statement": "Prove for any given positive integer (N) there exist only finitely many integers (n) with (\phi(n) = N) where (\phi) denotes Euler's totient function. Conclude in particular that (\phi(n)) tends to infinity as (n) tends to infinity.",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Properties of Euler's Totient Function",
-      "dependencies": ["Theorem 9"],
-      "type": "Theorem"
-    },
-    {
-      "name": "Theorem 11",
-      "statement": "Prove that if (d) divides (n), then (\phi(d)) divides (\phi(n)) where (\phi) denotes Euler's totient function.",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Properties of Euler's Totient Function",
-      "dependencies": ["Theorem 10"],
-      "type": "Theorem"
-    }
-  ],
-  "examples": [
-    {
-      "name": "Example: Divisibility by Composite Numbers",
-      "content": "If (n) is composite, there exist integers (a) and (b) such that (n) divides (ab) but (n) does not divide either (a) or (b). For example, if (n = 6), then (a = 2) and (b = 3) satisfy the condition because (6) divides (2 \cdot 3 = 6) but (6) does not divide (2) or (3).",
-      "subject": "Number Theory",
-      "domain": "Divisibility and Composite Numbers",
-      "illustrates_theorems": ["Theorem 3"],
-      "difficulty": "Easy"
-    },
-    {
-      "name": "Example: Solution to Linear Diophantine Equation",
-      "content": "Let (a = 2), (b = 3) and (N = 7). The greatest common divisor ((2, 3) = 1). A particular solution to the equation (2x + 3y = 7) is (x_0 = 2) and (y_0 = 1). Therefore, the general solution is given by (X = 2 + 3t) and (Y = 1 - 2t) for any integer (t). For example, if (t = 0), then (X = 2) and (Y = 1); if (t = 1), then (X = 5) and (Y = -1).",
-      "subject": "Number Theory",
-      "domain": "Diophantine Equations",
-      "illustrates_theorems": ["Theorem 4"],
-      "difficulty": "Medium"
-    },
-    {
-      "name": "Example: Euler's Totient Function for Small Numbers",
-      "content": "Calculate (\phi(n)) for (n = 1, 2, 3, 4, 5): (\phi(1) = 1), (\phi(2) = 1), (\phi(3) = 2), (\phi(4) = 2), (\phi(5) = 4).",
-      "subject": "Number Theory",
-      "domain": "Euler's Totient Function",
-      "illustrates_theorems": ["Theorem 5"],
-      "difficulty": "Easy"
-    },
-    {
-      "name": "Example: Well Ordering Property of Integers",
-      "content": "The set of integers (\mathbb{Z}) is well-ordered because every non-empty subset has a least element. For example, the smallest positive integer is 1 and the smallest negative integer is -1. The minimal element in any subset is unique. For instance, the smallest element in the subset (\{3, 5, 7\}) is 3.",
-      "subject": "Set Theory",
-      "domain": "Ordering and Induction",
-      "illustrates_theorems": ["Theorem 6"],
-      "difficulty": "Easy"
-    },
-    {
-      "name": "Example: Irrationality of Square Root of a Prime Number",
-      "content": "Prove that (\sqrt{p}) is irrational for any prime (p). Assume the contrary, that (\sqrt{p} = \frac{a}{b}) where (a) and (b) are coprime integers. Then (p b^2 = a^2), implying (p) divides (a^2). Since (p) is prime, (p) must divide (a). Let (a = p k) for some integer (k). Substituting back, we get (p b^2 = (p k)^2 = p^2 k^2), so (b^2 = p k^2). This implies (p) divides (b^2), and hence (p) divides (b). But this contradicts the assumption that (a) and (b) are coprime. Therefore, (\sqrt{p}) is irrational.",
-      "subject": "Number Theory",
-      "domain": "Irrationality of Square Roots",
-      "illustrates_theorems": ["Theorem 7"],
-      "difficulty": "Medium"
-    },
-2026-01-02 01:31:20,389 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 21
-2026-01-02 01:31:20,389 - base_logger - INFO - Processing chunk 22/1608
-2026-01-02 01:31:20,665 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:31:26,165 - base_logger - ERROR - JSON parsing error: Invalid \escape: line 16 column 157 (char 590)
-2026-01-02 01:31:26,165 - base_logger - INFO - ```json
-{
-  "theorems": [
-    {
-      "name": "Theorem 1",
-      "statement": "There are precisely (n) distinct equivalence classes mod (n), namely (0, 1, 2, \\ldots, n-1).",
-      "proof": "Not provided",
-      "subject": "Number Theory",
-      "domain": "Equivalence Relations and Modular Arithmetic",
-      "dependencies": [],
-      "type": "Theorem"
-    }
-  ],
-  "examples": [
-    {
-      "name": "Example: Equivalence Classes Modulo 3",
-      "content": "Consider the equivalence classes modulo 3. The set of integers (\\mathbb{Z}) can be partitioned into three distinct equivalence classes: (\{0, 3, 6, 9, \\ldots\}), (\{1, 4, 7, 10, \\ldots\}), and (\{2, 5, 8, 11, \\ldots\}). Each integer belongs to exactly one of these classes based on its remainder when divided by 3.",
-      "subject": "Number Theory",
-      "domain": "Equivalence Relations and Modular Arithmetic",
-      "illustrates_theorems": ["Theorem 1"],
-      "difficulty": "Easy"
-    }
-  ]
-}
-```
-2026-01-02 01:31:26,165 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 22
-2026-01-02 01:31:26,165 - base_logger - INFO - Processing chunk 23/1608
-2026-01-02 01:31:26,444 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2026-01-02 01:31:31,711 - base_logger - INFO - there is 2 entire
-2026-01-02 01:31:31,711 - base_logger - INFO - Extracted 1 theorems and 1 examples from chunk 23
-2026-01-02 01:31:31,711 - base_logger - INFO - Processing chunk 24/1608
-2026-01-02 01:31:31,853 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+      "name": "Orbit-Stabilizer Theorem",
+      "statement": "For a group action ( G \\to X ), ( |G| \cdot \\text{Orbit}(x) = \\text{Stabilizer}(x) ).",
+      "proof": "Refer to Section 4.2 for proof details.",
+      "subject": "Group Actions",
+      "domain": "Al
+2026-01-02 03:14:13,812 - base_logger - INFO - Extracted 0 theorems and 0 examples from chunk 5
+2026-01-02 03:14:13,812 - base_logger - INFO - Processing chunk 6/1608
+2026-01-02 03:14:14,260 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
