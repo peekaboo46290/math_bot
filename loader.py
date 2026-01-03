@@ -16,9 +16,9 @@ from theorem import Theorem
 from example import Example
 load_dotenv(".env")
 
-url = os.getenv("NEO4J_URI")
-username = os.getenv("NEO4J_USERNAME")
-password = os.getenv("NEO4J_PASSWORD")
+neo4j_url = os.getenv("NEO4J_URI")
+neo4j_username = os.getenv("NEO4J_USERNAME")
+neo4j_password = os.getenv("NEO4J_PASSWORD")
 ollama_base_url = os.getenv("OLLAMA_BASE_URL")
 llm_name = os.getenv("LLM")
 
@@ -104,7 +104,7 @@ logger.info("did the chain stuff")
 
 #loading neo4j
 neo4j_graph = Neo4jGraph(
-    url=url, username=username, password=password, refresh_schema=False
+    url=neo4j_url, username=neo4j_username, password=neo4j_password
 )
 initialize_smth(neo4j_graph)
 logger.info("Successfully connected to Neo4j")
@@ -223,33 +223,6 @@ def add_example(example: Example) -> bool:
             logger.error(f"Failed to add example '{example.name}': {e}")
             return False
 
-def get_theorems_by_subject(subject: str, limit: int = 10) -> List[Dict[str, Any]]:
-        query = """
-        MATCH (t:Theorem)-[:BELONGS_TO_SUBJECT]->(s:Subject {name: $subject})
-        RETURN t.name as name, 
-                t.statement as statement, 
-                t.type as type, 
-                t.proof as proof
-        ORDER BY t.name
-        LIMIT $limit
-        """
-        result = neo4j_graph.query(query, params={'subject': subject, 'limit': limit})
-        return result
-
-def get_theorems_by_domain(domain: str, limit: int = 10) -> List[Dict[str, Any]]:
-        query = """
-        MATCH (t:Theorem)-[:BELONGS_TO_DOMAIN]->(s:Domain {name: $domain})
-        RETURN t.name as name, 
-                t.statement as statement, 
-                t.type as type, 
-                t.proof as proof
-        ORDER BY t.name
-        LIMIT $limit
-        """
-        result = neo4j_graph.query(query, params={'subject': domain, 'limit': limit})
-        return result
-
-#add here some more get and move them
 
 def process_file(file_path:str):
     text = read_pdf(file_path, logger=logger)
