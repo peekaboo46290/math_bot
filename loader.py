@@ -25,7 +25,8 @@ llm_name = os.getenv("LLM")
 
 prompt = PromptTemplate(
     input_variables=["text"],
-template="""You are an expert mathematician. Extract all mathematical theorems, lemmas, propositions,  cororectallaries and examples from the text below.
+template="""JUST RETURN JSON DONT TALK AND DONT EXPLAIN
+You are an expert mathematician. Extract all mathematical theorems, lemmas, propositions,  cororectallaries and examples from the text below.
 
 Return ONLY a valid JSON object in this exact format (no other text):
 {{
@@ -52,9 +53,9 @@ Return ONLY a valid JSON object in this exact format (no other text):
 }}
 ]
 }}
-Most important rule: Return only Json don't talk
+Most important rule: Return only Json don't talk or generate code just return json and dont make stuff up that are not in the text provided
 
--Only use valid JSON escape sequences Don't use "\\)" and "\\(" just use plain "(" and ")"
+-Only use valid JSON escape sequences 
 Rules:
 1. Extract ALL mathematical statements and make them descriptive
 2. Use clear, standard mathematical terminology
@@ -74,6 +75,7 @@ Rules:
 16 If no theorems found, return empty theorems array.
 17. chose one type for theorem type
 18. Use Unicode symbols directly: ∀, ∃, →, ⇒, Z, R
+19. for division use /
 CRITICAL: When writing mathematical statements in JSON:
 1. Use plain text or Unicode symbols
 2. If you MUST use LaTeX, escape backslashes: use \\ for single backslash

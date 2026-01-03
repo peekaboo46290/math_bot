@@ -25,7 +25,6 @@ def load_embedding_model(logger=logger, config={}):
 def load_llm(llm_name:str, ollama_base_url:str, logger = logger):
     try:
         llm =  ChatOllama(
-            num_predict= 2048,
             temperature=0,
             base_url=ollama_base_url,
             model=llm_name,
@@ -34,6 +33,7 @@ def load_llm(llm_name:str, ollama_base_url:str, logger = logger):
             top_k=10,  # A higher value (100) will give more diverse answers, while a lower value (10) will be more conservative.
             top_p=0.3,  # Higher value (0.95) will lead to more diverse text, while a lower value (0.5) will generate more focused text.
             num_ctx=3072,  # Sets the size of the context window used to generate the next token.
+            num_predict=-1
         )
         logger.info(f"Loaded llm: {llm_name}")
         return llm

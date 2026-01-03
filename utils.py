@@ -84,16 +84,7 @@ def create_math_aware_splitter(chunk_size: int = 2500, chunk_overlap: int = 250)
     )
 
 def extract_from_text(llm_chain, text: str, logger= logger) :
-    text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=2500,
-            chunk_overlap=250,
-            separators=[
-                "\n\n\n", "\n\n", "\n",
-                "∎", "□", "∴", "∵", "⇒", "⇔", "∀", "∃",
-                ". ", " ", ""
-            ],
-            length_function=len
-        )
+    text_splitter = create_math_aware_splitter()
     chunks = text_splitter.split_text(text)
     logger.info(f"Split text into {len(chunks)} chunks")
     print (chunks[200])
@@ -125,6 +116,7 @@ def clean_json_output(llm_output):
     text = text.replace('\\"', '"')  
     text = text.replace('\\(', '(')  # Unescape bitch 1
     text = text.replace('\\)', ')')  # Unescape bitch 2
+    text = text.replace('\\k', '/k')  # Unescape bitch 2
 
     # Remove trailing commas in arrays/objects
     import re
@@ -174,7 +166,7 @@ def parse_response(response:str, logger= logger):
     
     except json.JSONDecodeError as e:
         logger.error(f"JSON parsing error: {e}")
-        logger.info(response)
+        #logger.info(response)
         return [], []
     except Exception as e:
         logger.error(f"Error parsing response: {e}")
