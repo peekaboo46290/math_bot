@@ -69,6 +69,7 @@ def get_theorems_by_subject(subject: str, limit: int = 10) -> List[Dict[str, Any
         return result
 
 def get_theorems_by_domain(domain: str, limit: int = 10) -> List[Dict[str, Any]]:
+    try:
         query = """
         MATCH (t:Theorem)-[:BELONGS_TO_DOMAIN]->(s:Domain {name: $domain})
         RETURN t.name as name, 
@@ -80,6 +81,9 @@ def get_theorems_by_domain(domain: str, limit: int = 10) -> List[Dict[str, Any]]
         """
         result = neo4j_graph.query(query, params={'subject': domain, 'limit': limit})
         return result
+    except Exception as e:
+        logger.info(f"ERROR while getting theorem by domain: {e}")
+
 #add here some more get and move them
 
 def generate_respond(question:str, chat_history):
@@ -136,5 +140,6 @@ async def health_check():
     return {"status": "healthy"}
 
 if __name__ == "__main__":
+    print(get_theorems_by_domain(domain="Rational Numbers"))
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

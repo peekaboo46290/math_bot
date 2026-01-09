@@ -21,7 +21,7 @@ class Example(BaseModel):
     @field_validator('difficulty')
     @classmethod
     def valid_difficulty(cls, v:str, info: ValidationInfo):
-        valid_levels = ['Easy', 'Medium', 'Hard']
+        valid_levels = ['Easy', 'Medium', 'Hard', 'Very Hard']
         if info.data and v not in valid_levels:
             logger.warning(f"Invalid difficulty '{v}', defaulting to 'Medium'")
             return 'Medium'

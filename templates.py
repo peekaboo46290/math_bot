@@ -29,13 +29,15 @@ Rules:
 9. Do not hallucinate.
 10. chose one type for theorem type
 12. Preserve all mathematical symbols exactly. 
+13. If no theorems found, return empty theorems array.
+14. Do Not Use Invalid \escape in Json
 
 Text to analyze:
 {text}
 
 JSON response:""",
 
-    "examples": """
+    "example": """
 You are an expert mathematician. Extract all mathematical examples from the text below.
 
 Return ONLY a valid JSON object in this exact format (no other text):
@@ -66,6 +68,7 @@ Rules:
 11. Examples should reference which theorems they demonstrate.
 12. Preserve all mathematical symbols exactly. 
 13. If no examples found, return empty examples array.
+14. Do Not Use Invalid \escape in Json
 Text to analyze:
 {text}
 

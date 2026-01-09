@@ -1,7 +1,9 @@
 import re
+import os
 import json
 import fitz
 from typing import List
+from dotenv import load_dotenv
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from docling.document_converter import DocumentConverter
@@ -10,7 +12,14 @@ from theorem import Theorem
 from example import Example
 from base_logger import logger
 from templates import templates
+
+from chains import create_llm_chain
 converter = DocumentConverter()
+
+load_dotenv(".env")
+
+ollama_base_url = os.getenv("OLLAMA_BASE_URL")
+llm_name = os.getenv("LLM")
 
 
 def read_pdf(pdf_path: str, logger = logger) -> str:
@@ -83,7 +92,7 @@ def create_math_aware_splitter(chunk_size: int = 2500, chunk_overlap: int = 250)
         is_separator_regex=False
     )
 
-def extract_from_text(llm_chain, text: str, logger= logger) :
+def extract_from_text(extract, text: str, logger= logger) :
     text_splitter = create_math_aware_splitter()
     chunks = text_splitter.split_text(text)
     logger.info(f"Split text into {len(chunks)} chunks")
@@ -94,7 +103,7 @@ def extract_from_text(llm_chain, text: str, logger= logger) :
 
     for i, chunk in enumerate(chunks, 1):
         logger.info(f"Processing chunk {i}/{len(chunks)}")
-        theorems, examples = extract_from_chunk(llm_chain= llm_chain,chunk= chunk, logger= logger)
+        theorems, examples = extract_from_chunk(extract= extract,chunk= chunk, logger= logger)
         all_theorems.extend(theorems)
         all_examples.extend(examples)
         logger.info(f"Extracted {len(theorems)} theorems and {len(examples)} examples from chunk {i}")
@@ -125,17 +134,25 @@ def clean_json_output(llm_output):
     
     return text
 
-def extract_from_chunk(llm_chain, chunk: str, logger= logger) :
-        try:
-            response = llm_chain.invoke({"text": chunk})
-            theorems, examples =  parse_response(response= clean_json_output(response),logger= logger)
-            return theorems, examples
-        except Exception as e:
-            logger.error(f"Error extracting from chunk: {e}")
-            return [], []
+def extract_from_chunk(extract, chunk: str, logger= logger) :
+        theorems, examples =  [], []
+        for w_extract in extract:
+            try:
+                llm_chain = create_llm_chain(
+                    llm_name= llm_name,
+                    ollama_base_url= ollama_base_url,
+                    template=templates[w_extract]
+                )
+                response = llm_chain.invoke({"text": chunk})
+                temp_theorems, temp_examples =  parse_response(response= clean_json_output(response))
+                theorems.extend(temp_theorems)
+                examples.extend(temp_examples)
+            except Exception as e:
+                logger.error(f"Error extracting from chunk: {e}")
+        return theorems, examples
 
 
-def parse_response(response:str, logger= logger):
+def parse_response(response:str):
     try:
         json_match = re.search(r'\{.*\}', response, re.DOTALL)
         if not json_match:

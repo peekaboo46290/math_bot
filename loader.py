@@ -10,7 +10,6 @@ from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from base_logger import logger
 
 from utils import initialize_smth, read_pdf, extract_from_text
-from chains import load_embedding_model, create_llm_chain
 
 from theorem import Theorem
 from example import Example
@@ -24,7 +23,7 @@ llm_name = os.getenv("LLM")
 
 #loading neo4j
 neo4j_graph = Neo4jGraph(
-    url=neo4j_url, username=neo4j_username, password=neo4j_password
+    url=neo4j_url, username=neo4j_username, password=neo4j_password,refresh_schema= False
 )
 initialize_smth(neo4j_graph)
 logger.info("Successfully connected to Neo4j")
@@ -97,12 +96,12 @@ def add_example(example: Example) -> bool:
             create_example_query = """
             MERGE (e:Example {name: $name})
             SET e.content = $content,
-                e.difficulty = $difficulty,
+                e.difficulty = $difficulty
 
             
             MERGE (s:Subject {name: $subject})
             MERGE (e)-[:BELONGS_TO_SUBJECT]->(s)
-            
+        
             MERGE (d:Domain {name: $domain})
             MERGE (e)-[:BELONGS_TO_DOMAIN]->(d)
             MERGE (d)-[:PART_OF_SUBJECT]->(s)
@@ -147,7 +146,7 @@ def add_example(example: Example) -> bool:
 def process_file(file_path:str):
     text = read_pdf(file_path, logger=logger)
     theorems, examples = extract_from_text(
-        llm_chain= chain,
+        extract= {"example"},#"theorem", "example"
         text= text,
         logger= logger
     )
