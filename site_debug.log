@@ -1,2 +1,2 @@
-2026-01-09 16:44:35,684 - base_logger - INFO - Connected to neo4j.
-2026-01-09 16:44:35,849 - base_logger - INFO - ERROR while getting theorem by domain: {code: Neo.ClientError.Statement.ParameterMissing} {message: Expected parameter(s): domain}
+2026-01-09 16:50:08,754 - base_logger - INFO - Connected to neo4j.
+2026-01-09 16:50:08,991 - base_logger - INFO - ERROR while getting theorem by domain: {code: Neo.ClientError.Statement.ParameterMissing} {message: Expected parameter(s): domain}
