@@ -27,7 +27,6 @@ def read_pdf(pdf_path: str, logger = logger) -> str:
     try:
         doc = fitz.open(pdf_path)
         
-        # Extract text from each page
         for page_num in range(len(doc)):
             page = doc.load_page(page_num)
             text += page.get_text() + "\n\n"

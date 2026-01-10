@@ -91,7 +91,6 @@ def check_theorem_existence(theorem_name: str) -> bool:
     return result[0]['exists'] if result else False
 
 def add_example(example: Example) -> bool:
-        """Add an example to the graph with all relationships."""
         try:
             create_example_query = """
             MERGE (e:Example {name: $name})

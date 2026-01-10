@@ -1,6 +1,5 @@
 templates = {
-    "theorem":"""
-You are an expert mathematician. Extract all mathematical theorems, lemmas, propositions, and corollaries from the text below.
+    "theorem":"""You are an expert mathematician. Extract all mathematical theorems, lemmas, propositions, and corollaries from the text below.
 
 Return ONLY a valid JSON object in this exact format (no other text):
 {{
@@ -37,8 +36,7 @@ Text to analyze:
 
 JSON response:""",
 
-    "example": """
-You are an expert mathematician. Extract all mathematical examples from the text below.
+    "example": """You are an expert mathematician. Extract all mathematical examples from the text below.
 
 Return ONLY a valid JSON object in this exact format (no other text):
 {{
@@ -101,7 +99,7 @@ Relevant Theorems:
 
 chat history: {chat_history}
 
-User Question: {message}
+User Question: {question}
 
 Notes:
 1. Theorems are represented as:
@@ -112,6 +110,8 @@ theorem_2: "other theorem it depends on",
 Rules:
 1. Apply the given theorem to solve the question, provided it is relevant.
 2. if nothing given to you use your on knowledge
+3. if no knowledge provided dont mention it
+
 Provide a clear, mathematically precise answer. If the theorems provided are relevant, reference them by name. If you need to explain connections between theorems, use their dependency relationships.""",
 
     "answer_without_rag":"""

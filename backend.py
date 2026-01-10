@@ -46,7 +46,7 @@ except Exception as e:
     logger.info(f"Error in connecting to neo4j: {e}")
 
 
-chat_history = ""
+chat_history = " "
 class ChatRequest(BaseModel):
     message: str
     conversation_id: str = "default"
@@ -75,8 +75,7 @@ def get_theorem_by_name(theorem_name: str):
     
     result = neo4j_graph.query(query, params={'name': theorem_name.strip()})
 #add here some more get and move them
-
-def generate_respond(question:str, chat_history):
+def generate_respond(question:str, chat_history= chat_history, use_chat_history = True):
     answer = ""
     source = []
 
@@ -89,13 +88,15 @@ def generate_respond(question:str, chat_history):
     query = llm.invoke({"chat_history": chat_history, "question": question})
     logger.info(query)
 
-    theorems = Dict()
-    if query in ["No algebra", "whatever"]:
+    theorems = {}
+    if query.strip() in ["No algebra", "whatever"]:
         llm = create_llm_chain(
             llm_name= llm_name,
             ollama_base_url= ollama_base_url,
             template= templates["answer_without_rag"]
         )
+        logger.info("used answer_without_rag")
+
         answer = llm.invoke({"chat_history": chat_history, "question": question})
     else:
         theorems_name = query.split(';')
@@ -106,32 +107,35 @@ def generate_respond(question:str, chat_history):
             ollama_base_url= ollama_base_url,
             template= templates["answer_with_rag"]
         )
-        answer = llm.invoke({"chat_history": chat_history, "question": question, "theorems": Theorems})
-    chat_history += question + "\n" + answer + "\n"
-    return QueryResponse(
-        answer= answer,
-        sources= theorems
-    )
+        logger.info("used answer_with_rag")
+
+        answer = llm.invoke({"chat_history": chat_history, "question": question, "theorems": theorems})
+    if use_chat_history:
+        chat_history += question + "\n" + answer + "\n"
+    return answer
+    
 
 
-@app.post("/chat", response_model=ChatResponse)
-async def process_query(request: ChatRequest):
-    try:
-        result = generate_respond.process(
-            question=request.query,
-            chat_history=chat_history
-        )
-        return QueryResponse(
-            answer=result["answer"],
-            sources=result["sources"]
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @app.post("/chat", response_model=ChatResponse)
+# async def process_query(request: ChatRequest):
+#     try:
+#         result = generate_respond(
+#             question=request.query
+#         )
+#         return QueryResponse(
+#             answer=result["answer"],
+#             sources=result["sources"]
+#         )
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
+# @app.get("/health")
+# async def health_check():
+#     return {"status": "healthy"}
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    while True:
+        inp = input(">>")
+        print(generate_respond(inp))
+    # import uvicorn
+    # uvicorn.run(app, host="0.0.0.0", port=8000)
