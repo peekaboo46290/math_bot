@@ -87,8 +87,10 @@ Rules:
 2. if the user isn't asking about algebra related question return "No algebra" 
 3. if the user isn't asking about specific theorem just return "whatever"
 4. Do not hallucinate.
-5. if multiple theorem needed to answer return them in a list with "theorem 1, theorem 2...
-6. if the user just asking for clarification return "No algebra" """,
+5. if multiple theorem needed to answer return them in a list with "theorem_1_name ; theorem_2_name...
+6. if the user just asking for clarification return "No algebra" 
+7. return only theorem name
+""",
 
     "answer_with_rag":"""
 You are a mathematical specialized in algebra assistant with access to a knowledge graph of theorems.
@@ -101,6 +103,15 @@ chat history: {chat_history}
 
 User Question: {message}
 
+Notes:
+1. Theorems are represented as:
+{{theorem_1: "other theorem it depends on",
+theorem_2: "other theorem it depends on",
+}}
+
+Rules:
+1. Apply the given theorem to solve the question, provided it is relevant.
+2. if nothing given to you use your on knowledge
 Provide a clear, mathematically precise answer. If the theorems provided are relevant, reference them by name. If you need to explain connections between theorems, use their dependency relationships.""",
 
     "answer_without_rag":"""
@@ -112,6 +123,6 @@ chat history:
 
 User Question: {question}
 
-Provide a clear, mathematically precise answer. If the theorems provided are relevant, reference them by name. If you need to explain connections between theorems, use their dependency relationships.
+Provide a clear,  precise answer. 
 """
 }

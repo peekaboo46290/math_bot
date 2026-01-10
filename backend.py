@@ -51,39 +51,29 @@ class ChatRequest(BaseModel):
     message: str
     conversation_id: str = "default"
 
-class QueryResponse(BaseModel):
-    answer: str
-    sources: list
+class ChatResponse(BaseModel):
+    response: str
+    sources: List[Dict] = []
 
-def get_theorems_by_subject(subject: str, limit: int = 10) -> List[Dict[str, Any]]:
+def get_dependencies(theorem_name: str) -> List[str]:
         query = """
-        MATCH (t:Theorem)-[:BELONGS_TO_SUBJECT]->(s:Subject {name: $subject})
-        RETURN t.name as name, 
-                t.statement as statement, 
-                t.type as type, 
-                t.proof as proof
-        ORDER BY t.name
-        LIMIT $limit
+        MATCH (t:Theorem {name: $name})-[:DEPENDS_ON]->(dep:Theorem)
+        RETURN dep.name as dependency
+        ORDER BY dep.name
         """
-        result = neo4j_graph.query(query, params={'subject': subject, 'limit': limit})
-        return result
+        result = neo4j_graph.query(query, params={'name': theorem_name.strip()})
+        return [record['dependency'] for record in result]
 
-def get_theorems_by_domain(domain: str, limit: int = 10) -> List[Dict[str, Any]]:
-    try:
-        query = """
-        MATCH (t:Theorem)-[:BELONGS_TO_DOMAIN]->(s:Domain {name: $domain})
-        RETURN t.name as name, 
-                t.statement as statement, 
-                t.type as type, 
-                t.proof as proof
-        ORDER BY t.name
-        LIMIT $limit
-        """
-        result = neo4j_graph.query(query, params={'subject': domain, 'limit': limit})
-        return result
-    except Exception as e:
-        logger.info(f"ERROR while getting theorem by domain: {e}")
-
+def get_theorem_by_name(theorem_name: str):
+    query = """
+    MATCH (t:Theorem {name: $name})
+    RETURN t.name as name,
+        t.statement as statement,
+        t.proof as proof,
+        t.type as type
+    """
+    
+    result = neo4j_graph.query(query, params={'name': theorem_name.strip()})
 #add here some more get and move them
 
 def generate_respond(question:str, chat_history):
@@ -99,6 +89,7 @@ def generate_respond(question:str, chat_history):
     query = llm.invoke({"chat_history": chat_history, "question": question})
     logger.info(query)
 
+    theorems = Dict()
     if query in ["No algebra", "whatever"]:
         llm = create_llm_chain(
             llm_name= llm_name,
@@ -107,21 +98,23 @@ def generate_respond(question:str, chat_history):
         )
         answer = llm.invoke({"chat_history": chat_history, "question": question})
     else:
-        Theorems = ''
+        theorems_name = query.split(';')
+        for t_name in theorems_name:
+            theorems[get_theorem_by_name(t_name)] = [get_theorem_by_name(dep) for dep in get_dependencies(t_name)]
         llm = create_llm_chain(
             llm_name= llm_name,
             ollama_base_url= ollama_base_url,
             template= templates["answer_with_rag"]
         )
         answer = llm.invoke({"chat_history": chat_history, "question": question, "theorems": Theorems})
-
+    chat_history += question + "\n" + answer + "\n"
     return QueryResponse(
         answer= answer,
-        sources= source
+        sources= theorems
     )
 
 
-@app.post("/api/query")
+@app.post("/chat", response_model=ChatResponse)
 async def process_query(request: ChatRequest):
     try:
         result = generate_respond.process(
@@ -140,6 +133,5 @@ async def health_check():
     return {"status": "healthy"}
 
 if __name__ == "__main__":
-    print(get_theorems_by_domain(domain="Rational Numbers"))
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

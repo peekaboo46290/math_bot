@@ -120,14 +120,13 @@ def extract_from_text(extract, text: str, logger= logger) :
 def clean_json_output(llm_output):
     text = llm_output.strip()
     
-    text = text.replace('\\n', '\\\\n')  # Escape newlines
-    text = text.replace('\\t', '\\\\t')  # Escape tabs
+    text = text.replace('\\n', '\\\\n')  
+    text = text.replace('\\t', '\\\\t')  
     text = text.replace('\\"', '"')  
-    text = text.replace('\\(', '(')  # Unescape bitch 1
-    text = text.replace('\\)', ')')  # Unescape bitch 2
-    text = text.replace('\\k', '/k')  # Unescape bitch 2
+    text = text.replace('\\(', '(')  
+    text = text.replace('\\)', ')')  
+    text = text.replace('\\k', '/k')  
 
-    # Remove trailing commas in arrays/objects
     import re
     text = re.sub(r',\s*}', '}', text)
     text = re.sub(r',\s*]', ']', text)
