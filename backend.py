@@ -8,8 +8,6 @@ from langchain_neo4j import Neo4jGraph
 from langchain_ollama.llms import OllamaLLM
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 import ollama
 
 

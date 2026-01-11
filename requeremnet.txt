@@ -1,7 +1,8 @@
 docling 
 dotenv
 pydantic
-streamlit
+flask_cors
+flask
 pdfplumber
 langchain_text_splitters
 langchain 
